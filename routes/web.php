@@ -20,3 +20,8 @@ Route::get('/register',[\App\Http\Controllers\AuthController::class, 'viewRegist
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/registerUser', [\App\Http\Controllers\AuthController::class, 'registerUser'])->name('register');
+
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/index',[App\Http\Controllers\IndexController::class,'index'])->name('index');
