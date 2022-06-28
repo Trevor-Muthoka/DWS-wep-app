@@ -30,8 +30,11 @@
 {{--                        <li><a href="#">Drop Down 4</a></li>--}}
 {{--                    </ul>--}}
 {{--                </li>--}}
-                <li><a href="#">Login</a></li>
-                <li><a href="#">Registration</a></li>
+                @if(session('loggedin'))
+                    <li><a href="{{'dashboard'}}">{{session('loginFirstname')}}</a></li>
+                @endif
+                <li><a href="{{route('login')}}">Login</a></li>
+                <li><a href="{{route('register')}}">Registration</a></li>
             </ul>
         </nav><!-- .navbar -->
 

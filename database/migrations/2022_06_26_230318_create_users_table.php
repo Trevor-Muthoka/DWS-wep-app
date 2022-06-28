@@ -20,8 +20,8 @@ return new class extends Migration
             $table->foreignId('role_id')->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
             $table->string('email', 100)->unique();
             $table->string('password', 100);
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->boolean('is_deleted')->default(false);
+            $table->timestamps();
 
         });
     }

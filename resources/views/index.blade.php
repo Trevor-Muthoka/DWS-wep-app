@@ -9,8 +9,8 @@
     <div class="container">
         <div class="row gy-4 d-flex justify-content-between">
             <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-                <h2 data-aos="fade-up" style="color:#0a0d13">Domestic workers at your service</h2>
-                <h5 data-aos="fade-up" data-aos-delay="100" style="color:#000000">A platform for domestic workers to get a steady stream of clients and clients to get their preferred services done.</h5>
+                <h2 data-aos="fade-up" style="color:white">Domestic workers at your service</h2>
+                <h5 data-aos="fade-up" data-aos-delay="100" style="color: #dcdfe5">A platform for domestic workers to get a steady stream of clients and clients to get their preferred services done.</h5>
 
 {{--                <form action="#" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up" data-aos-delay="200">--}}
 {{--                    <label for="ZIP">ZIP</label><input type="text" id="ZIP" class="form-control" placeholder="ZIP code or CitY">--}}
@@ -47,9 +47,9 @@
 {{--                        </div>--}}
 {{--                    </div><!-- End Stats Item -->--}}
 
-                </div>
-
             </div>
+
+        </div>
 
 {{--            <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">--}}
 {{--                <img src=" {{ asset('assets/img/hero-img.svg')}}" class="img-fluid mb-3 mb-lg-0" alt="">--}}

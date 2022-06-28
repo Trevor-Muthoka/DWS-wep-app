@@ -19,9 +19,9 @@ Route::get('/login',[\App\Http\Controllers\Auth\LoginController::class, 'index']
 Route::get('/register',[\App\Http\Controllers\AuthController::class, 'viewRegister'])->name('registration');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/registerUser', [\App\Http\Controllers\AuthController::class, 'registerUser'])->name('register');
+Route::post('/registerUser', [\App\Http\Controllers\AuthController::class, 'registerUser'])->name('registerUser');
 
 
-
+Route::post('/loginUser',[\App\Http\Controllers\AuthController::class, 'loginUser'])->name('loginUser');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/index',[App\Http\Controllers\IndexController::class,'index'])->name('index');
