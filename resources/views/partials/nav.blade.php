@@ -9,7 +9,7 @@
 
         <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
         <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-        <nav id="navbar" class="navbar">
+        <nav id="navbar" class="navbar navbar-dark">
             <ul>
                 <li><a href="{{ route('index')}}" class="active">Home</a></li>
                 <li><a href="#">Jobs</a></li>
@@ -31,10 +31,13 @@
 {{--                    </ul>--}}
 {{--                </li>--}}
                 @if(session('loggedin'))
-                    <li><a href="{{'dashboard'}}">{{session('loginFirstname')}}</a></li>
+                    <li><a href="{{route('admin.dashboard')}}">{{session('loginFirstname')}}</a></li>
+                    <li><a href="{{route('admin.logout')}}">Logout</a></li>
                 @endif
+                @if(session('loggedin')== false)
                 <li><a href="{{route('login')}}">Login</a></li>
                 <li><a href="{{route('register')}}">Registration</a></li>
+                @endif
             </ul>
         </nav><!-- .navbar -->
 

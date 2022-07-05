@@ -70,4 +70,8 @@ class AuthController extends Controller
             return back()->with('fail', 'Credentials are incorrect');
         }
     }
+    public function logout(Request $request){
+        $request->session()->flush();
+        return redirect('login');
+    }
 }
