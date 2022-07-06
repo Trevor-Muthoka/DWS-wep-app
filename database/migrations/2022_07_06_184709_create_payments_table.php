@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
+        Schema::create('payments', function (Blueprint $table) {
+            $table->id()->autoIncrement();
+            $table->integer('amount');
+            $table->foreignId('job_id')->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
+            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('payments');
     }
 };

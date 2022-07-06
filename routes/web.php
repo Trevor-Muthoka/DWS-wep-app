@@ -25,7 +25,6 @@ Route::post('/registerUser', [\App\Http\Controllers\AuthController::class, 'regi
 Route::post('/loginUser',[\App\Http\Controllers\AuthController::class, 'loginUser'])->name('loginUser');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/index',[App\Http\Controllers\IndexController::class,'index'])->name('index');
-Route::get('/listings',[App\Http\Controllers\ListingsController::class,'listings'])->name('listings');
 Route::name('admin.')->group(function (){
    Route::get('dashboard',[\App\Http\Controllers\AdminDashboardController::class,'index'])->name('dashboard');
    Route::get('profile',[\App\Http\Controllers\AdminDashboardController::class,'displayProfile'])->name('profile');
