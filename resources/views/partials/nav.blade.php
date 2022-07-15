@@ -30,9 +30,17 @@
 {{--                        <li><a href="#">Drop Down 4</a></li>--}}
 {{--                    </ul>--}}
 {{--                </li>--}}
-                @if(session('loggedin'))
+                @if(session('loggedin') and session('loginRoleId')==3)
                     <li><a href="{{route('admin.dashboard')}}">{{session('loginFirstname')}}</a></li>
                     <li><a href="{{route('admin.logout')}}">Logout</a></li>
+                @endif
+                @if(session('loggedin') and session('loginRoleId')==1)
+                    <li><a href="{{route('worker.dashboard')}}">{{session('loginFirstname')}}</a></li>
+                    <li><a href="{{route('worker.logout')}}">Logout</a></li>
+                @endif
+                @if(session('loggedin') and session('loginRoleId')==2)
+                    <li><a href="{{route('employer.dashboard')}}">{{session('loginFirstname')}}</a></li>
+                    <li><a href="{{route('employer.logout')}}">Logout</a></li>
                 @endif
                 @if(session('loggedin')== false)
                 <li><a href="{{route('login')}}">Login</a></li>
