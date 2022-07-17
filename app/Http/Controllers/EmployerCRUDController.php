@@ -14,10 +14,25 @@ class EmployerCRUDController extends Controller
                                 ->join('roles','users.role_id','=','roles.id')
                                 ->select('users.*','roles.name')
                                 ->where('role_id','=',2)
-                                ->get()
-                                 ->paginate(10);
+                                ->get();
 
 //        $data['employees'] = Users::where('role_id',2)->paginate(10);
-        return view('employerCRUD.index',$data);
+        return view('dashboards.book',$data);
     }
+
+    public function show(User $user)
+    {
+        return view('dashboards.show');
+    }
+
+    public function book2()
+    {
+        return view('dashboards.book2');
+    }
+    public function book3()
+    {
+        return view('dashboards.book3');
+    }
+
+
 }

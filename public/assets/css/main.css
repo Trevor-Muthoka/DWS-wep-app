@@ -140,7 +140,7 @@ section {
 
 .breadcrumbs .page-header:before {
   content: "";
-  background-color: rgba(14, 29, 52, 0.8);
+  /*background-color: rgba(14, 29, 52, 0.8);*/
   position: absolute;
   inset: 0;
 }
@@ -148,17 +148,19 @@ section {
 .breadcrumbs .page-header h2 {
   font-size: 56px;
   font-weight: 500;
-  color: rgba(17, 17, 17, 0.6);
+  color: #000000;
   font-family: var(--font-secondary);
 }
 
 .breadcrumbs .page-header p {
-  color: rgba(17, 17, 17, 0.6);
+  color: #000000;
+    font-weight: 800;
 }
 
 .breadcrumbs nav {
   background-color: rgba(0, 0, 0, 0.6);
   padding: 20px 0;
+    font-weight:200;
 }
 
 .breadcrumbs nav ol {
@@ -310,7 +312,7 @@ section {
 }
 
 .header.sticked {
-  background: rgba(121, 125, 157, 0.9);
+  background: rgba(111, 187, 211, 0.9);
   padding: 15px 0;
   box-shadow: 0px 2px 20px rgba(14, 29, 52, 0.1);
 }
@@ -356,8 +358,8 @@ section {
     padding: 10px 0 10px 30px;
     font-family: var(--font-primary);
     font-size: 16px;
-    font-weight: 400;
-    color: rgba(17, 17, 17, 0.6);
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.6);
     white-space: nowrap;
     transition: 0.3s;
   }
@@ -368,12 +370,13 @@ section {
     line-height: 0;
     margin-left: 5px;
   }
-
   .navbar a:hover,
   .navbar .active,
   .navbar .active:focus,
   .navbar li:hover>a {
     color: #000000;
+      font-size:20px;
+      font-weight:800;
   }
 
   .navbar .get-a-quote,
@@ -416,7 +419,7 @@ section {
     font-size: 15px;
     text-transform: none;
     font-weight: 400;
-    color: var(--color-secondary);
+    color: #ffffff;
   }
 
   .navbar .dropdown ul a i {
@@ -426,7 +429,7 @@ section {
   .navbar .dropdown ul a:hover,
   .navbar .dropdown ul .active:hover,
   .navbar .dropdown ul li:hover>a {
-    color: var(--color-primary);
+    color: rgba(111, 187, 211, 0.9);
   }
 
   .navbar .dropdown:hover>ul {
@@ -487,7 +490,7 @@ section {
     inset: 0;
     padding: 50px 0 10px 0;
     margin: 0;
-    background: rgba(14, 29, 52, 0.9);
+    background: rgba(111, 187, 211, 0.9);
     overflow-y: auto;
     transition: 0.3s;
     z-index: 9998;
@@ -502,7 +505,7 @@ section {
     font-family: var(--font-primary);
     font-size: 16px;
     font-weight: 500;
-    color: rgba(17, 17, 17, 0.6);
+    color: rgba(0, 0, 0, 0.6);
     white-space: nowrap;
     transition: 0.3s;
   }
@@ -518,7 +521,9 @@ section {
   .navbar .active,
   .navbar .active:focus,
   .navbar li:hover>a {
-    color: rgba(17, 17, 17, 0.6);
+    color: rgba(0, 0, 100, 0.6);
+      font-size: 25px;
+      font-weight:800;
   }
 
   .navbar .get-a-quote,
@@ -533,7 +538,7 @@ section {
   .navbar .get-a-quote:hover,
   .navbar .get-a-quote:focus:hover {
     color: rgba(17, 17, 17, 0.6);
-    background: rgba(13, 66, 255, 0.8);
+    background: rgba(121, 125, 157, 0.9);
   }
 
   .navbar .dropdown ul,
@@ -585,7 +590,7 @@ section {
     content: "";
     position: fixed;
     inset: 0;
-    background: rgba(14, 29, 52, 0.8);
+    /*background: rgba(111, 187, 211, 0.9);*/
     z-index: 9996;
   }
 }
@@ -1045,63 +1050,6 @@ section {
   }
 }
 
-/*--------------------------------------------------------------
-# Frequently Asked Questions Section
---------------------------------------------------------------*/
-.faq {
-  padding-top: 80px;
-}
-
-.faq .accordion-item {
-  border: 0;
-  margin-bottom: 10px;
-}
-
-.faq .accordion-collapse {
-  border: 0;
-}
-
-.faq .accordion-button {
-  padding: 15px 30px 20px 60px;
-  font-weight: 600;
-  border: 0;
-  font-size: 18px;
-  color: var(--color-default);
-  text-align: left;
-  background: rgba(14, 29, 52, 0.03);
-  border-radius: 5px;
-}
-
-.faq .accordion-button:focus {
-  box-shadow: none;
-}
-
-.faq .accordion-button:not(.collapsed) {
-  color: var(--color-primary);
-  border-bottom: 0;
-  box-shadow: none;
-}
-
-.faq .question-icon {
-  position: absolute;
-  top: 14px;
-  left: 25px;
-  font-size: 20px;
-  color: var(--color-primary);
-}
-
-.faq .accordion-button:after {
-  position: absolute;
-  right: 15px;
-  top: 15px;
-}
-
-.faq .accordion-body {
-  padding: 0 30px 25px 60px;
-  border: 0;
-  background: rgba(14, 29, 52, 0.03);
-  border-radius: 5px;
-}
 
 /*--------------------------------------------------------------
 # Testimonials Section
@@ -1309,253 +1257,8 @@ section {
   margin: 0 2px;
 }
 
-/*--------------------------------------------------------------
-# Horizontal Pricing Section
---------------------------------------------------------------*/
-.horizontal-pricing .pricing-item {
-  box-shadow: 0 3px 20px -2px rgba(108, 117, 125, 0.15);
-  padding-bottom: 30px;
-  background: #fff;
-  height: 100%;
-  position: relative;
-}
 
-.horizontal-pricing h3 {
-  font-weight: 700;
-  margin-bottom: 0;
-  font-size: 24px;
-  color: var(--color-secondary);
-}
 
-.horizontal-pricing h4 {
-  font-size: 48px;
-  color: var(--color-primary);
-  font-weight: 400;
-  font-family: var(--font-primary);
-  margin-bottom: 25px;
-  text-align: center;
-}
-
-.horizontal-pricing h4 sup {
-  font-size: 28px;
-}
-
-.horizontal-pricing h4 span {
-  color: rgba(108, 117, 125, 0.8);
-  font-size: 18px;
-}
-
-.horizontal-pricing ul {
-  padding: 20px 0;
-  list-style: none;
-  color: #6c757d;
-  text-align: left;
-  line-height: 20px;
-}
-
-.horizontal-pricing ul li {
-  padding-top: 15px;
-  display: flex;
-  align-items: center;
-}
-
-.horizontal-pricing ul i {
-  color: #059652;
-  font-size: 24px;
-  padding-right: 3px;
-}
-
-.horizontal-pricing ul .na {
-  color: rgba(108, 117, 125, 0.5);
-}
-
-.horizontal-pricing ul .na i {
-  color: rgba(108, 117, 125, 0.5);
-}
-
-.horizontal-pricing ul .na span {
-  text-decoration: line-through;
-}
-
-.horizontal-pricing .buy-btn {
-  display: inline-block;
-  padding: 12px 40px;
-  border-radius: 4px;
-  color: #fff;
-  background-color: var(--color-primary);
-  border: 2px solid var(--color-primary);
-  transition: none;
-  font-size: 16px;
-  font-weight: 500;
-  transition: 0.3s;
-  font-family: var(--font-primary);
-}
-
-.horizontal-pricing .buy-btn:hover {
-  background: #406aff;
-  border-color: #406aff;
-}
-
-.horizontal-pricing .featured {
-  background: var(--color-primary);
-}
-
-.horizontal-pricing .featured h3,
-.horizontal-pricing .featured h4,
-.horizontal-pricing .featured h4 span,
-.horizontal-pricing .featured ul,
-.horizontal-pricing .featured ul .na,
-.horizontal-pricing .featured ul i,
-.horizontal-pricing .featured ul .na i {
-  color: #fff;
-}
-
-.horizontal-pricing .featured .buy-btn {
-  background: var(--color-primary);
-  color: #fff;
-  border-color: #fff;
-}
-
-.horizontal-pricing .featured .buy-btn:hover {
-  background: #fff;
-  color: var(--color-primary);
-}
-
-/*--------------------------------------------------------------
-# Get a Quote Section
---------------------------------------------------------------*/
-.get-a-quote .quote-bg {
-  min-height: 500px;
-  background-size: cover;
-  background-position: center;
-}
-
-.get-a-quote .php-email-form {
-  background: #f3f6fc;
-  padding: 40px;
-  height: 100%;
-}
-
-@media (max-width: 575px) {
-  .get-a-quote .php-email-form {
-    padding: 20px;
-  }
-}
-
-.get-a-quote .php-email-form h3 {
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.get-a-quote .php-email-form h4 {
-  font-size: 14px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 20px 0 0 0;
-}
-
-.get-a-quote .php-email-form p {
-  font-size: 14px;
-  margin-bottom: 20px;
-}
-
-.get-a-quote .php-email-form .error-message {
-  display: none;
-  color: #fff;
-  background: #df1529;
-  text-align: left;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.get-a-quote .php-email-form .sent-message {
-  display: none;
-  color: #fff;
-  background: #059652;
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-  font-weight: 600;
-}
-
-.get-a-quote .php-email-form .loading {
-  display: none;
-  background: #fff;
-  text-align: center;
-  padding: 15px;
-  margin-bottom: 24px;
-}
-
-.get-a-quote .php-email-form .loading:before {
-  content: "";
-  display: inline-block;
-  border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  margin: 0 10px -6px 0;
-  border: 3px solid #059652;
-  border-top-color: #fff;
-  -webkit-animation: animate-loading 1s linear infinite;
-  animation: animate-loading 1s linear infinite;
-}
-
-.get-a-quote .php-email-form input,
-.get-a-quote .php-email-form textarea {
-  border-radius: 0;
-  box-shadow: none;
-  font-size: 14px;
-  border-radius: 0;
-}
-
-.get-a-quote .php-email-form input:focus,
-.get-a-quote .php-email-form textarea:focus {
-  border-color: var(--color-primary);
-}
-
-.get-a-quote .php-email-form input {
-  padding: 12px 15px;
-}
-
-.get-a-quote .php-email-form textarea {
-  padding: 12px 15px;
-}
-
-.get-a-quote .php-email-form button[type=submit] {
-  background: var(--color-primary);
-  border: 0;
-  padding: 10px 30px;
-  color: #fff;
-  transition: 0.4s;
-  border-radius: 4px;
-}
-
-.get-a-quote .php-email-form button[type=submit]:hover {
-  background: rgba(13, 66, 255, 0.8);
-}
-
-@-webkit-keyframes animate-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes animate-loading {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 /*--------------------------------------------------------------
 # Contact Section
@@ -1754,8 +1457,8 @@ section {
 .hero {
   width: 100%;
   min-height: 100vh;
-  background-color: var(--color-secondary);
-  background-image: url("../img/hero-bg1.jpeg");
+  background-color: var(--color-primary);
+  background-image: url("../img/hero-bg.jpg");
   background-size: cover;
   background-position: center;
   position: relative;

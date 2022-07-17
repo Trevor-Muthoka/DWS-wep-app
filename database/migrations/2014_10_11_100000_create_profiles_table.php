@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('profile_id')->autoIncrement();
             $table->string('skillset',255);
             $table->string('location',255);
+            $table->string('image');
             $table->integer('phone');
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
             $table->timestamps();

@@ -42,25 +42,15 @@
 
                             <li class="nav-item">
                                 {{-- <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button> --}}
-                                <a class="nav-link active" href="{{ route('wprofile') }}">Overview</a>
+                                <a class="nav-link" href="{{ route('wprofile') }}">Overview</a>
                             </li>
-                           
-@if($addInfo->isEmpty())
-                            <li class="nav-item" id="adinfo">
-                                {{-- <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Additional Information</button> 
-                                --}}
-                                <a class="nav-link" id="adinfo" href="{{ route('additional') }}">Additional Info</a>
-                            </li>
-                            @else
-                            <li class="nav-item  d-none" id="adinfo">
-                                {{-- <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Additional Information</button> 
-                                --}}
-                                <a class="nav-link  d-none" id="adinfo" href="{{ route('additional') }}">Additional Info</a>
-                            </li>
-@endif                        
 
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Edit</button>
+                                <a class="nav-link active" href="{{ route('wprofile') }}">Additional Info</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Edit profile</button>
                             </li>
 
                             <li class="nav-item">
@@ -68,18 +58,57 @@
                             </li>
 
                         </ul>
-                        <div class="tab-content pt-2">
-
-                            <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                               
-                                <h5 class="card-title">Profile Details</h5>
+                      
+                                <div class="tab-pane fade show active profile-overview pt-3" id="profile-overview">
                                 @if(session('status'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                                     {{ session('status') }}
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
                             @endif
-                             @foreach($users as $user)
+                                <!-- Profile Edit Form -->
+                                <form method="post" action="{{ url('addInfo') }}" enctype="multipart/form-data" id="addinfo">
+                                    @csrf
+                                    <div class="row mb-3">
+                                        <label for="image" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="file" name="image" class=" @error('image') is-invalid @enderror form-control" placeholder="Upload Image">
+                                            @error('image')
+                                             <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <textarea name="about" class="  @error('about') is-invalid @enderror form-control" id="about" style="height: 100px" placeholder="I am a cheerful person"></textarea>
+                                            @error('about')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="phone" type="text" class=" @error('phone') is-invalid @enderror form-control" id="phone" placeholder="e.g 0753996033">
+                                            @error('phone')
+                                    <div class="invalid-feedback">{{$message}}</div>
+                                @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary" name="add">Save Changes</button>
+                                    </div>
+                                </form><!-- End Profile Edit Form -->
+
+                            </div>
+                            {{-- @else
+                            <div class="tab-pane fade show active profile-overview pt-3" id="profile-edit">
+
+                            
                                 <div class="row">
                                     <div class="col-lg-3 col-md-4 label ">First Name</div>
                                     <div class="col-lg-9 col-md-8">{{ $user->firstname}}</div>
@@ -94,26 +123,19 @@
                                     <div class="col-lg-3 col-md-4 label">Email</div>
                                     <div class="col-lg-9 col-md-8">{{ $user->email}}</div>
                                 </div>
-                                @endforeach
-                                @if(isset($addInfo))
-                                @foreach($addInfo as $info)
-                               <div class="row">
-                                   <div class="col-lg-3 col-md-4 label">About</div>
-                                   <div class="col-lg-9 col-md-8">{{ $info->about }}</div>
-                               </div>
 
-                               <div class="row">
-                                   <div class="col-lg-3 col-md-4 label">Phone</div>
-                                   <div class="col-lg-9 col-md-8">{{ $info->phone }}</div>
-                               </div>
-                               @endforeach
-                               @endif
+                                 <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">About</div>
+                                    <div class="col-lg-9 col-md-8">{{ $info->email}}</div>
+                                </div>
 
+                                 <div class="row">
+                                    <div class="col-lg-3 col-md-4 label">Phone</div>
+                                    <div class="col-lg-9 col-md-8">{{ $info->email}}</div>
+                                </div>
 
-                            </div>
-
-                            
-                        </div><!-- End Bordered Tabs -->
+                            </div> --}}
+           
 
                     </div>
                 </div>
@@ -166,11 +188,11 @@
     });
 
     // $(document).ready(function () {
-    //     $('#adinfo').on('change', function () {
-    //         if (isset($addInfo)) {
-    //             $('#adinfo').addClass('d-none');
+    //     $('#addinfo').on('change', function () {
+    //         if (isset(about)) {
+    //             $('#residency').removeClass('d-none');
     //         } else {
-    //             $('#adinfo').removeClass('d-none');
+    //             $('#residency').addClass('d-none');
     //         }
     //     });
     // });

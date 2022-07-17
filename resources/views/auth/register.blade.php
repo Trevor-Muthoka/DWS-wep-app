@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('styles')
@@ -58,8 +59,8 @@
                         <div class="form-outline mb-4 py-2">
                             <select class="form-control form-control-lg" id="role" name="role">
                                 <option>Select Role</option>
-                                <option value="1">Worker</option>
-                                <option value="2">Employer</option>
+                                <option value="2">Worker</option>
+                                <option value="1">Employer</option>
                             </select>
                             <span class="text-danger">@error('role'){{$message}}@enderror</span>
                         </div>
@@ -67,7 +68,7 @@
                             <button type="submit" class="btn btn-primary btn-lg"
                                     style="padding-left: 2.5rem; padding-right: 2.5rem;">Register</button>
                             <p class="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="{{ route('login') }}"
-                                                                                              class="link-danger">Login</a></p>
+                                                                                                class="link-danger">Login</a></p>
                         </div>
 
                     </form>

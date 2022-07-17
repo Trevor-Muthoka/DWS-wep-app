@@ -14,6 +14,8 @@ class Jobs extends Model
         'description',
         'user_id',
         'status',
+        'payment',
+        'location',
         'created_at',
         'updated_at',
     ];

@@ -58,8 +58,10 @@ class AuthController extends Controller
                 $request->session()->put('loginId', $user->id);
                 $request->session()->put('loggedin', true);
                 $request->session()->put('loginEmail', $user->email);
+                $request->session()->put('userRole',$user->role_id);
                 $request->session()->put('loginFirstname', $user->firstname);
-                return redirect('index');
+                $request->session()->put('loginLastname', $user->lastname);
+                return redirect('home');
             }
             else
             {
