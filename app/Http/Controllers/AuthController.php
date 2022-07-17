@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Session;
 use Mail;
@@ -27,6 +28,7 @@ class AuthController extends Controller
             'role'=>'required',
         ]);
         $user = new User();
+        
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->role_id = $request->role;
@@ -52,6 +54,9 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('email','=', $request->email)->first();
+        $role = DB::table('roles')->where('id','=',$user->role_id)->first();
+
+
         if($user){
             if(Hash::check($request->password, $user->password))
             {
@@ -61,6 +66,9 @@ class AuthController extends Controller
                 $request->session()->put('userRole',$user->role_id);
                 $request->session()->put('loginFirstname', $user->firstname);
                 $request->session()->put('loginLastname', $user->lastname);
+                $request->session()->put('loginRole', $role->name);
+                $request->session()->put('loginRoleId', $user->role_id);
+
                 return redirect('home');
             }
             else

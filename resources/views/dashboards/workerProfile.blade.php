@@ -44,23 +44,23 @@
                                 {{-- <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button> --}}
                                 <a class="nav-link active" href="{{ route('wprofile') }}">Overview</a>
                             </li>
-                           
+
 @if($addInfo->isEmpty())
                             <li class="nav-item" id="adinfo">
-                                {{-- <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Additional Information</button> 
+                                {{-- <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Additional Information</button>
                                 --}}
                                 <a class="nav-link" id="adinfo" href="{{ route('additional') }}">Additional Info</a>
                             </li>
                             @else
                             <li class="nav-item  d-none" id="adinfo">
-                                {{-- <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Additional Information</button> 
+                                {{-- <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Additional Information</button>
                                 --}}
                                 <a class="nav-link  d-none" id="adinfo" href="{{ route('additional') }}">Additional Info</a>
                             </li>
-@endif                        
+@endif
 
                             <li class="nav-item">
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings">Edit</button>
+                                <a class="nav-link" href="{{ route('editProfile') }}">Edit Profile</a>
                             </li>
 
                             <li class="nav-item">
@@ -71,7 +71,7 @@
                         <div class="tab-content pt-2">
 
                             <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                               
+
                                 <h5 class="card-title">Profile Details</h5>
                                 @if(session('status'))
                                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -112,7 +112,7 @@
 
                             </div>
 
-                            
+
                         </div><!-- End Bordered Tabs -->
 
                     </div>
@@ -123,7 +123,7 @@
     </section>
 @endsection
 @push('scriptsdash')
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script>
@@ -144,7 +144,7 @@
                     numeric: true,
                     min:10,
                 },
-            
+
             },
             messages: {
                 image: {

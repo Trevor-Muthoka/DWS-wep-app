@@ -46,11 +46,12 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link active" href="{{ route('wprofile') }}">Additional Info</a>
+                                <a class="nav-link" href="{{ route('wprofile') }}">Additional Info</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('editProfile') }}">Edit Profile</a>
+                                {{-- <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-settings">Edit profile</button> --}}
+                                <a class="nav-link active" href="{{ route('editProfile') }}">Edit Profile</a>
                             </li>
 
                             <li class="nav-item">
@@ -67,22 +68,54 @@
                                 </div>
                             @endif
                                 <!-- Profile Edit Form -->
-                                <form method="post" action="{{ url('addInfo') }}" enctype="multipart/form-data" id="addinfo">
+                                <form method="post" action="{{ url('profileEdit',$users->user_id) }}" enctype="multipart/form-data" id="editinfo">
                                     @csrf
+                                    @method('PUT')
+
+                                    <div class="row mb-3">
+                                        <label for="firstname" class="col-md-4 col-lg-3 col-form-label">First Name</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" name="firstname" class=" @error('firstname') is-invalid @enderror form-control" value="{{ $users->firstname }}">
+                                            @error('firstname')
+                                             <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="lastname" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="text" name="lastname" class=" @error('lastname') is-invalid @enderror form-control" value="{{ $users->lastname }}">
+                                            @error('lastname')
+                                             <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input type="email" name="email" class=" @error('email') is-invalid @enderror form-control" value="{{ $users->email }}">
+                                            @error('email')
+                                             <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                     <div class="row mb-3">
                                         <label for="image" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input type="file" name="image" class=" @error('image') is-invalid @enderror form-control" placeholder="Upload Image">
+                                            <input type="file" name="image" class=" @error('image') is-invalid @enderror form-control">
                                             @error('image')
                                              <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
+                                        </div>
+                                        <div class="col-md-8 col-lg-9">
+                                            <img src="{{Storage::url($users->image)}}" height="200" width="200" alt="">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <textarea name="about" class="  @error('about') is-invalid @enderror form-control" id="about" style="height: 100px" placeholder="I am a cheerful person"></textarea>
+                                            <textarea name="about" class="  @error('about') is-invalid @enderror form-control" id="about" style="height: 100px">{{ $users->about }}</textarea>
                                             @error('about')
                                     <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -92,7 +125,7 @@
                                     <div class="row mb-3">
                                         <label for="phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="phone" type="text" class=" @error('phone') is-invalid @enderror form-control" id="phone" placeholder="e.g 0753996033">
+                                            <input name="phone" type="text" class=" @error('phone') is-invalid @enderror form-control" id="phone" value="{{ $users->phone }}">
                                             @error('phone')
                                     <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -100,7 +133,7 @@
                                     </div>
 
                                     <div class="text-center">
-                                        <button type="submit" class="btn btn-primary" name="add">Save Changes</button>
+                                        <button type="submit" class="btn btn-primary" name="edit">Save Changes</button>
                                     </div>
                                 </form><!-- End Profile Edit Form -->
 
@@ -150,8 +183,25 @@
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script>
     $(document).ready(function (){
-        $('#addinfo').validate({
+        $('#editinfo').validate({
             rules: {
+                firstname: {
+                    required: true,
+                    string: true,
+                    max: 25
+                },
+                lastname: {
+                    required: true,
+                    string: true,
+                    max: 25
+                },
+                email{
+                    required : true,
+                    string: true,
+                    email: true,
+                    max: 100,
+                    unique: users,
+                },
                 image: {
                     required: true,
                     image: true,
@@ -169,6 +219,23 @@
 
             },
             messages: {
+                firstname: {
+                    required: "Please fill in your first name",
+                    string: "Ensure you input a string",
+                    max: "Maximum characters is 25",
+                },
+                lastname: {
+                    required: "Please fill in your first name",
+                    string: "Ensure you input a string",
+                    max: "Maximum characters is 25",
+                },
+                email{
+                    required :  "Please fill in your email",
+                    string: "Ensure you input a string",
+                    email: "Ensure you input a valid email",
+                    max: "Maximum characters,numbers and symbols is 100",
+                    unique: "Email has already been taken",
+                },
                 image: {
                     required: "Please insert an image",
                     image: "Please insert an image",

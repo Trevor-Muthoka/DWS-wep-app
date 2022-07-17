@@ -54,6 +54,7 @@
 
    <!-- Template Main JS File -->
    <script src="{{ asset('assets3/js/main.js')}}"></script>
+   @stack('scripts')
 
 </body>
 </html>

@@ -20,14 +20,14 @@ class WorkerDashboardController extends Controller
 
     public function profileADD()
     {
-        
+
         $loginID=session('loginId');
         // $users = DB::table('users')
         //            ->join('profiles','users.id','=','profiles.user_id')
         //            ->select('users.*','profiles.*')
         //            ->where('user_id','=',$loginID)
         //            ->get();
-                      
+
         $users=User::where('id','=',$loginID)->get();
         $addInfo=Profile::where('user_id','=',$loginID)->get();
 
@@ -55,7 +55,7 @@ class WorkerDashboardController extends Controller
         // $profile->phone = $request->phone;
         // $profile->about = $request->about;
         // $profile->user_id = session('loginId');
-        
+
         // if($image = $request->file('image')){
         //     $destinationPath = 'images/';
         //     $profileImage = date('YmdHis').".".$image->getClientOriginalExtension();
@@ -64,9 +64,52 @@ class WorkerDashboardController extends Controller
         // }
 
         // Profile::create($profile);
-     
+
         // return redirect()->route('dashboards.workerProfile')
         //                 ->with('success','Information added successfully.');
-    
+
+    }
+
+    public function profileEdit()
+    {
+
+
+        return view('dashboards.editProfile');
+    }
+
+    public function editProfile(Request $request,$user_id)
+    {
+        $users = DB::table('users')
+                   ->join('profiles','users.id','=','profiles.user_id')
+                   ->select('users.*','profiles.*')
+                   ->where('user_id','=',$user_id)
+                   ->get();
+
+        $request->validate([
+            'firstname' => 'required|string|max:25',
+             'lastname'=>'required|string|max:25',
+             'email'=>'required|string|email|max:100|unique:users',
+             'about'=> 'required',
+             'phone'=> 'required|numeric|min:10|unique:profiles'
+         ]);
+
+         if($request->hasFile('image')){
+             $request->validate([
+                 'image'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|unique:profiles',
+             ]);
+             $path = $request->file('image')->store('public/images');
+             $users->image = $path;
+         }
+
+         $users->firstname = $request->firstname;
+         $users->lastname = $request->lastname;
+         $users->email = $request->email;
+         $users->phone = $request->phone;
+         $users->about = $request->about;
+
+         $users->update();
+
+         return redirect()->route('wprofile')->with('status','Information updated successfully.');
+
     }
 }

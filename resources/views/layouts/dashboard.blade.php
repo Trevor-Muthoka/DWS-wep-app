@@ -6,6 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>Components / Alerts - NiceAdmin Bootstrap Template</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -29,12 +30,14 @@
     <!-- Template Main CSS File -->
     <link href="assets1/css/style.css" rel="stylesheet">
 
-    <!-- =======================================================
-    * Template Name: NiceAdmin - v2.2.2
-    * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+
+    <!-- CSS Libraries -->
+    @yield('css_libraries')
+
+
 </head>
 
 <body>
@@ -211,12 +214,12 @@
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src=""  class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">Trevor</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{session('loginFirstname')}}</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>Trevor</h6>
+                        <h6>{{session('loginFirstname')}}</h6>
                         <span>Web Designer</span>
                     </li>
                     <li>
@@ -254,7 +257,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="{{route('admin.logout')}}">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Sign Out</span>
                         </a>
@@ -273,12 +276,12 @@
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
-{{--        <li class="nav-item">--}}
-{{--            <a class="nav-link collapsed" href="index.html">--}}
-{{--                <i class="bi bi-grid"></i>--}}
-{{--                <span>Dashboard</span>--}}
-{{--            </a>--}}
-{{--        </li><!-- End Dashboard Nav -->--}}
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{route('admin.dashboard')}}">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li><!-- End Dashboard Nav -->
 
         <li class="nav-item">
             <a class="nav-link " data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
@@ -363,17 +366,21 @@
                 <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-{{--                <li>--}}
-{{--                    <a href="forms-elements.html">--}}
-{{--                        <i class="bi bi-circle"></i><span>Form Elements</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li>--}}
-{{--                    <a href="forms-layouts.html">--}}
-{{--                        <i class="bi bi-circle"></i><span>Form Layouts</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li>--}}
+                <li>
+                    <a href="{{route('admin.AddUser')}}">
+                        <i class="bi bi-circle"></i><span>Add User</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.addJob')}}">
+                        <i class="bi bi-circle"></i><span>Add Job</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.addRole')}}">
+                        <i class="bi bi-circle"></i><span>Add Roles</span>
+                    </a>
+                <li>
 {{--                    <a href="forms-editors.html">--}}
 {{--                        <i class="bi bi-circle"></i><span>Form Editors</span>--}}
 {{--                    </a>--}}
@@ -386,23 +393,83 @@
             </ul>
         </li><!-- End Forms Nav -->
 
-{{--        <li class="nav-item">--}}
-{{--            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">--}}
-{{--                <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>--}}
-{{--            </a>--}}
-{{--            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">--}}
-{{--                <li>--}}
-{{--                    <a href="tables-general.html">--}}
-{{--                        <i class="bi bi-circle"></i><span>General Tables</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--                <li>--}}
-{{--                    <a href="tables-data.html">--}}
-{{--                        <i class="bi bi-circle"></i><span>Data Tables</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
-{{--        </li><!-- End Tables Nav -->--}}
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{route('admin.getUsers')}}">
+                        <i class="bi bi-circle"></i><span>Display Users</span>
+                    </a>
+                </li>
+
+            </ul>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{route('admin.getJobs')}}">
+                        <i class="bi bi-circle"></i><span>Display Jobs</span>
+                    </a>
+                </li>
+
+            </ul>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{route('admin.getServices')}}">
+                        <i class="bi bi-circle"></i><span>Display Services</span>
+                    </a>
+                </li>
+
+            </ul>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{route('admin.getRoles')}}">
+                        <i class="bi bi-circle"></i><span>Display Roles</span>
+                    </a>
+                </li>
+
+            </ul>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{route('admin.getUsers')}}">
+                        <i class="bi bi-circle"></i><span>Display Users</span>
+                    </a>
+                </li>
+
+            </ul>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{route('admin.getApplications')}}">
+                        <i class="bi bi-circle"></i><span>Display Applications</span>
+                    </a>
+                </li>
+
+            </ul>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{route('admin.getBookings')}}">
+                        <i class="bi bi-circle"></i><span>Display Bookings</span>
+                    </a>
+                </li>
+
+            </ul>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{route('admin.getReviews')}}">
+                        <i class="bi bi-circle"></i><span>Display Reviews</span>
+                    </a>
+                </li>
+            </ul>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{route('admin.getPayments')}}">
+                        <i class="bi bi-circle"></i><span>Display Payments</span>
+                    </a>
+                </li>
+
+            </ul>
+
+        </li><!-- End Tables Nav -->
 
 {{--        <li class="nav-item">--}}
 {{--            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">--}}
@@ -427,11 +494,11 @@
 {{--            </ul>--}}
 {{--        </li><!-- End Charts Nav -->--}}
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+{{--        <li class="nav-item">--}}
+{{--            <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">--}}
+{{--                <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>--}}
+{{--            </a>--}}
+{{--            <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">--}}
 {{--                <li>--}}
 {{--                    <a href="icons-bootstrap.html">--}}
 {{--                        <i class="bi bi-circle"></i><span>Bootstrap Icons</span>--}}
@@ -447,8 +514,8 @@
 {{--                        <i class="bi bi-circle"></i><span>Boxicons</span>--}}
 {{--                    </a>--}}
 {{--                </li>--}}
-            </ul>
-        </li><!-- End Icons Nav -->
+{{--            </ul>--}}
+{{--        </li><!-- End Icons Nav -->--}}
 
         <li class="nav-heading">Pages</li>
 
@@ -508,14 +575,7 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>Employers</h1>
-        <nav>
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item">Users</li>
-                <li class="breadcrumb-item active">Employers</li>
-            </ol>
-        </nav>
+        @yield('page-title')
     </div><!-- End Page Title -->
 
     <section class="section">
@@ -552,6 +612,9 @@
 
 <!-- Template Main JS File -->
 <script src="assets1/js/main.js"></script>
+
+<!-- Custom JS Files -->
+@stack('scripts')
 
 </body>
 

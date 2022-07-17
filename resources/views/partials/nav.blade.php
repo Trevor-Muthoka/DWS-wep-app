@@ -86,17 +86,17 @@
                 @if(session('loggedin'))
                 <li class="dropdown"><a href="#"><span>{{session('loginFirstname')}}</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        @if(session('userRole') == 3)
+                        @if(session('loggedin') and session('loginRoleId')==3)
                             <li><a href="{{'admin.dashboard'}}">Dashboard</a></li>
                             <li><a href="{{'profile'}}">Profile</a></li>
                             <li><a href="{{'logout'}}">Logout</a></li>
                         @endif
-                        @if(session('userRole') == 2)
+                        @if(session('loggedin') and session('loginRoleId')==2)
                             <li><a href="">Dashboard</a></li>
                             <li><a href="{{'wprofile'}}">Profile</a></li>
                             <li><a href="{{'logout'}}">Logout</a></li>
                         @endif
-                        @if(session('userRole') == 1)
+                        @if(session('loggedin') and session('loginRoleId')==1)
                             <li><a href="{{'cdashboard'}}">Dashboard</a></li>
                             <li><a href="{{'profile'}}">Profile</a></li>
                             <li><a href="{{'logout'}}">Logout</a></li>
