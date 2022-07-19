@@ -3,11 +3,11 @@
 @section('content')
 
     <div class="pagetitle">
-    <h1>POST A JOB</h1>
+    <h1>EDIT JOB</h1>
     <nav>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{route('clientDash')}}">Home</a></li>
-            <li class="breadcrumb-item active">Post a job</li>
+            <li class="breadcrumb-item active">Edit a job</li>
         </ol>
     </nav>
     </div><!-- End Page Title -->
@@ -15,7 +15,7 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">POST A JOB</h5>
+                                <h5 class="card-title">EDIT JOB</h5>
                                 @if(session('status'))
                                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                                         {{ session('status') }}
@@ -23,12 +23,13 @@
                                     </div>
                                 @endif
                                 <!-- Multi Columns Form -->
-                                <form class="row g-3" name="job" id="job" method="post" action="{{ url('jobpost')}}">
+                                <form class="row g-3" name="job" id="job" method="post" action="{{ route('updatejob',$jobs->id)}}">
                                     @csrf
+                                    <input type="hidden" name="userid" id="userid" value="{{session('loginId')}}">
                                     <div class="col-md-12">
                                         <label for="jobname" class="form-label">Job Name</label>
                                         {{-- @error('jobname') is-invalid @enderror  --}}
-                                        <input type="text" class="form-control" id="jobname" name="jobname" placeholder="e.g Cleaning clothes">
+                                        <input type="text" class="form-control" id="jobname" name="jobname" value="{{ $jobs->name }}">
                                         {{-- @error('jobname')
                                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                         @enderror --}}
@@ -36,7 +37,7 @@
                                     <div class="col-md-12">
                                         <label for="jobdescription" class="form-label">Job Description</label>
                                         {{-- @error('jobdescription') is-invalid @enderror  --}}
-                                        <textarea class="form-control" placeholder="e.g washing two buckets of clothes" id="jobdescription" name="jobdescription" style="height: 100px;"></textarea>
+                                        <textarea class="form-control" placeholder="e.g washing two buckets of clothes" id="jobdescription" name="jobdescription" style="height: 100px;">{{$jobs->description}}</textarea>
                                         {{-- @error('jobdescription')
                                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                         @enderror --}}
@@ -44,7 +45,7 @@
                                     <div class="col-md-6">
                                         <label for="payment" class="form-label">Expected pay</label>
                                         {{-- @error('payment') is-invalid @enderror --}}
-                                        <input type="number" class="form-control" id="payment" name="payment" placeholder="e.g 500">
+                                        <input type="number" class="form-control" id="payment" name="payment" value="{{ $jobs->payment }}">
                                         <p style="color:#e03e2d">NB: Negotiable</p>
                                         {{-- @error('payment')
                                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
@@ -53,22 +54,22 @@
                                     <div class="col-md-6">
                                         <label for="location" class="form-label">Location</label>
                                         {{-- @error('location') is-invalid @enderror --}}
-                                        <input type="text" class=" form-control" id="location" name="location" placeholder="e.g Muimara Estate">
+                                        <input type="text" class=" form-control" id="location" name="location" value="{{ $jobs->location }}">
                                         {{-- @error('location')
                                         <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
                                         @enderror --}}
                                     </div>
-{{--                                    <div class="col-md-6">--}}
-{{--                                        <label for="status" class="form-label">Status of Job</label>--}}
-{{--                                        <select id="status" name="status" class="@error('status') is-invalid @enderror form-select">--}}
-{{--                                            <option selected>Pending</option>--}}
-{{--                                            <option>Ongoing</option>--}}
-{{--                                            <option>Complete</option>--}}
-{{--                                        </select>--}}
+                                   <div class="col-md-6">
+                                       <label for="status" class="form-label">Status of Job</label>
+                                       <select id="status" name="status" class="@error('status') is-invalid @enderror form-select">
+                                           <option selected>Pending</option>
+                                           <option>Ongoing</option>
+                                           <option>Complete</option>
+                                       </select>
 {{--                                        @error('status')--}}
 {{--                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>--}}
 {{--                                        @enderror--}}
-{{--                                    </div>--}}
+                                    </div>
 {{--                                    <div class="col-md-6">--}}
 {{--                                        <label for="inputPassword5" class="form-label">Location</label>--}}
 {{--                                        <input type="password" class="form-control" id="inputPassword5">--}}

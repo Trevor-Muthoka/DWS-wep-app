@@ -65,13 +65,10 @@ Route::name('admin.')->group(function (){
 });
 Route::get('logout',[\App\Http\Controllers\Auth\LoginController::class,'logout'])->name('admin.logout');
 
-Route::get('jobs',[App\Http\Controllers\JobsController::class,'index'])->name('jobs');
-Route::get('jobdetail/{id}',[App\Http\Controllers\JobsController::class,'jobdetails'])->name('jobdetail');
-
 Route::name('client.')->group(function (){
     Route::get('cdashboard',[\App\Http\Controllers\ClientDashController::class,'index'])->name('clientDash');
     Route::get('post_a_job',[\App\Http\Controllers\ClientDashController::class,'postJob'])->name('postJob');
-});
+// });
 
 Route::post('jobpost',[\App\Http\Controllers\ClientDashController::class,'jobpostfunc'])->name('jobpost');
 
@@ -79,10 +76,33 @@ Route::get('book', [\App\Http\Controllers\EmployerCRUDController::class, 'index'
 Route::get('wprofile',[\App\Http\Controllers\WorkerDashboardController::class, 'profile'])->name('wprofile');
 Route::get('additional',[\App\Http\Controllers\WorkerDashboardController::class, 'profileADD'])->name('additional');
 
-Route::get('book2',[\App\Http\Controllers\EmployerCRUDController::class,'book2'])->name('book2');
-Route::get('book3',[\App\Http\Controllers\EmployerCRUDController::class,'book3'])->name('book3');
+Route::get('wdashboard',[\App\Http\Controllers\WorkerDashboardController::class, 'index'])->name('wdashboard');
 
 Route::post('addInfo',[\App\Http\Controllers\WorkerDashboardController::class, 'storeProfile'])->name('addInfo');
 
 Route::get('editProfile',[\App\Http\Controllers\WorkerDashboardController::class,'profileEdit'])->name('editProfile');
 Route::put('profileEdit',[\App\Http\Controllers\WorkerDashboardController::class,'editProfile'])->name('profileEdit');
+
+Route::get('changePassword',[\App\Http\Controllers\WorkerDashboardController::class,'changePass'])->name('changePassword');
+Route::post('updatePass',[\App\Http\Controllers\WorkerDashboardController::class, 'updatePass'])->name('updatePass');
+
+
+//client routes
+Route::get('cprofile',[\App\Http\Controllers\ClientDashController::class, 'viewProfile'])->name('cprofile');
+Route::get('clientAddInfo',[\App\Http\Controllers\ClientDashController::class, 'addInfo'])->name('clientAddInfo');
+Route::post('storeInfo',[\App\Http\Controllers\ClientDashController::class,'storeAddInfo'])->name('storeInfo');
+Route::get('editCP',[\App\Http\Controllers\ClientDashController::class,'editP'])->name('editCP');
+Route::put('CprofileEdit',[\App\Http\Controllers\ClientDashController::class,'editProfile'])->name('CprofileEdit');
+Route::get('changePass',[\App\Http\Controllers\WorkerDashboardController::class,'changePass'])->name('changePass');
+Route::post('updatePassword',[\App\Http\Controllers\WorkerDashboardController::class, 'updatePass'])->name('updatePassword');
+Route::get('postedJobs',[\App\Http\Controllers\ClientDashController::class, 'postedJobs'])->name('postedJobs');
+Route::get('editJob/{id}',[\App\Http\Controllers\ClientDashController::class, 'editJob'])->name('editJob');
+Route::post('updatejob{id}',[\App\Http\Controllers\ClientDashController::class, 'updateJob'])->name('updatejob');
+
+//Services CRUD
+Route::get('viewServices', [\App\Http\Controllers\WorkerDashboardController::class, 'viewService'])->name('viewServices');
+Route::get('addServiceForm', [\App\Http\Controllers\WorkerDashboardController::class, 'viewAddForm'])->name('addServiceForm');
+Route::post('addService', [\App\Http\Controllers\WorkerDashboardController::class, 'addService'])->name('addService');
+Route::get('editService/{id}', [\App\Http\Controllers\WorkerDashboardController::class, 'editService'])->name('editService');
+Route::post('updateService', [\App\Http\Controllers\WorkerDashboardController::class, 'updateService'])->name('updateService');
+Route::get('deleteService/{id}', [\App\Http\Controllers\WorkerDashboardController::class, 'destroyService'])->name('deleteService');

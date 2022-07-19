@@ -15,6 +15,16 @@ return [
     |
     */
 
+    'providers' => [
+
+        Yajra\Datatables\DatatablesServiceProvider::class,
+     ],
+
+      'aliases' => [
+
+       'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+      ],
+
     'name' => env('APP_NAME', 'Laravel'),
 
     /*

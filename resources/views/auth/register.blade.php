@@ -64,12 +64,12 @@
                             </select>
                             <span class="text-danger">@error('role'){{$message}}@enderror</span>
                         </div>
-                            <div class="form-outline mb-3 d-none" id="residency">
+                            {{-- <div class="form-outline mb-3 d-none" id="residency">
                                 <label class="form-label">Residency</label>
                                 <input type="text" id="form3Example4" name="residency" class="form-control form-control-lg"
                                        placeholder="Enter residency" />
                                 <span class="text-danger">@error('residency'){{$message}}@enderror</span>
-                            </div>
+                            </div> --}}
 
                             <div class="text-center text-lg-start mt-4 pt-2">
                             <button type="submit" class="btn btn-primary btn-lg"
@@ -85,7 +85,7 @@
         </div>
 
     </section>
-    @push('scripts')
+    {{-- @push('scripts')
         <script>
             $(document).ready(function () {
                 $('#role').on('change', function () {
@@ -97,6 +97,6 @@
                 });
             });
         </script>
-        @endpush
+        @endpush --}}
 @endsection
 

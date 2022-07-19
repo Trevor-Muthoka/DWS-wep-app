@@ -6,9 +6,17 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Service;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class WorkerDashboardController extends Controller
 {
+    public function index()
+    {
+        return view('dashboards.workerDash');
+    }
     public function profile()
     {
         $loginID=session('loginId');
@@ -37,7 +45,7 @@ class WorkerDashboardController extends Controller
     public function storeProfile(Request $request)
     {
         $request->validate([
-         'image'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|unique:profiles',
+         'image'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|unique:profiles',
          'about'=> 'required',
          'phone'=> 'required|numeric|min:10|unique:profiles'
         ]);
@@ -72,44 +80,192 @@ class WorkerDashboardController extends Controller
 
     public function profileEdit()
     {
+        $loginID=session('loginId');
+        $users = DB::table('users')
+        ->join('profiles','users.id','=','profiles.user_id')
+        ->select('users.*','profiles.*')
+        ->where('user_id','=',$loginID)
+        ->get();
 
-
-        return view('dashboards.editProfile');
+        return view('dashboards.editProfile',compact('users'));
     }
 
-    public function editProfile(Request $request,$user_id)
+    public function editProfile(Request $request,Profile $profile)
     {
-        $users = DB::table('users')
-                   ->join('profiles','users.id','=','profiles.user_id')
-                   ->select('users.*','profiles.*')
-                   ->where('user_id','=',$user_id)
-                   ->get();
 
         $request->validate([
             'firstname' => 'required|string|max:25',
              'lastname'=>'required|string|max:25',
-             'email'=>'required|string|email|max:100|unique:users',
+             'email'=>'required|string|email|max:100',
              'about'=> 'required',
-             'phone'=> 'required|numeric|min:10|unique:profiles'
+             'phone'=> 'required|numeric|min:10'
          ]);
 
          if($request->hasFile('image')){
              $request->validate([
-                 'image'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|unique:profiles',
+                 'image'=> 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
              ]);
              $path = $request->file('image')->store('public/images');
-             $users->image = $path;
+//             $profile->image = $path;
+             Profile::where('user_id',$request->userid)->update([
+//             'firstname' => $request->firstname,
+//             'lastname' => $request->lastname,
+//             'email' => $request->email,
+                 'image' => $path
+
+             ]);
          }
 
-         $users->firstname = $request->firstname;
-         $users->lastname = $request->lastname;
-         $users->email = $request->email;
-         $users->phone = $request->phone;
-         $users->about = $request->about;
+         $profile->firstname = $request->firstname;
+         $profile->lastname = $request->lastname;
+         $profile->email = $request->email;
+         $profile->phone = $request->phone;
+         $profile->about = $request->about;
 
-         $users->update();
+         Profile::where('user_id',$request->userid)->update([
+//             'firstname' => $request->firstname,
+//             'lastname' => $request->lastname,
+//             'email' => $request->email,
+             'phone' => $request->phone,
+             'about' => $request->about,
+
+         ]);
+
+        User::where('id',$request->userid)->update([
+             'firstname' => $request->firstname,
+             'lastname' => $request->lastname,
+             'email' => $request->email,
+
+
+        ]);
 
          return redirect()->route('wprofile')->with('status','Information updated successfully.');
 
+    }
+
+    public function changePass()
+    {
+        $loginID=session('loginId');
+        $users=User::where('id','=',$loginID)->get();
+        $addInfo=Profile::where('user_id','=',$loginID)->get();
+        return view('dashboards.changePassword',compact('users','addInfo'));
+    }
+
+    public function updatePass(Request $request)
+    {
+        $this->validate($request,[
+            'oldpassword'=> 'required',
+            'newpassword'=> 'required',
+        ]);
+
+
+        $user = User::findOrFail($request->userid);
+
+        if(!Auth::guard()->validate([
+         "email" =>$user->email,
+         "password" =>$request->oldpassword,
+        ])){
+            return back()->with("error","Old Password doesn't match");
+        };
+
+        //  if(!(Hash::check($request->oldpassword, $pass))){
+        //     return back()->with("error","Old Password doesn't match");
+        //  }
+
+    //      User::where('id',$request->userid)->update([
+    //        'password' => Hash::make($request->newpassword)
+    //    ]);
+
+       $user->password = Hash::make($request->newpassword);
+       $user->save();
+
+       return back()->with("status", "Password changed successfully");
+    }
+
+
+    public function viewService(){
+        $loginID=session('loginId');
+        // $services = User::join('services', 'users.id', '=', 'services.user_id')
+        //     ->select('services.*','users.*' )
+        //     ->where('user_id', '=',$loginID)
+        //     ->get();
+        $services=Service::where('user_id',$loginID)->get();
+        return view('dashboards.services', compact('services'));
+    }
+
+    public function viewAddForm(){
+        return view('dashboards.addService');
+    }
+
+    public function addService(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'servicename' => 'required|string|max:25|min:3',
+            'user_id' => 'required',
+            'payment' => 'required',
+        ]);
+
+
+        // if ($validator->fails())
+        // {
+        //     return response()->json(['error' => $validator->messages()], 400);
+        // }
+        // else
+        // {
+            $loginID=session('loginId');
+            $service = new Service();
+            $service->name = $request->servicename;
+            $service->user_id = $loginID;
+            $service->payment = $request->payment;
+            // $service->created_at = now();
+            // $service->updated_at = now();
+            // $res = $service->save();
+            $service->save();
+            // if($res)
+            // {
+                // return response()->json(['success' => 'Service added successfully.'], 200);
+                return redirect()->route('viewServices')->with('success', 'You have added a new service successfully.');
+            // }
+            // else
+            // {
+            //     return back()->with('fail', 'Oops!! There seems to be a problem');
+            // }
+        // }
+
+    }
+
+    public function editService($id)
+    {
+        $services=Service::find($id);
+
+        return view('dashboards.editService',compact('services'));
+    }
+
+    public function updateService(Request $request)
+    {
+        $id=$request->userid;
+        $validator = Validator::make($request->all(), [
+            'servicename' => 'required|string|max:25|min:3',
+            'user_id' => 'required',
+            'payment' => 'required',
+        ]);
+
+        $service = Service::find($id);
+        $loginID= session('loginId');
+        $service->name = $request->servicename;
+        $service->user_id = $loginID;
+        $service->payment = $request->payment;
+        $service->created_at = now();
+        $service->updated_at = now();
+        $service->save();
+
+        return redirect()->route('viewServices')->with('success', 'You have updated the service successfully.');
+    }
+
+    public function destroyService($id)
+    {
+        $service = Service::find($id);
+        $service->delete();
+        return redirect()->route('viewServices')->with('success', 'You have deleted the service successfully.');
     }
 }
