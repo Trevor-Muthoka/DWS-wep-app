@@ -1,4 +1,4 @@
-@extends('layouts.cdashboard')
+@extends('layouts.wdashboard')
 @yield('title','Profile')
 
 @section('content')
@@ -19,15 +19,16 @@
 
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+                        @if($users->count() > 0)
+                        @foreach($users as $user)
+                                <img src="{{Storage::url($user->image)}}" alt="Profile" class="rounded-circle">
+                        @endforeach
+                                @else
+                                <img src="assets2/img/avatar.png" alt="Profile" class="rounded-circle">
+                                @endif
 
-                        <img src="assets2/img/avatar.png" alt="Profile" class="rounded-circle">
                         <h2>{{ session('loginFirstname') }}</h2>
-                        <div class="social-links mt-2">
-                            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-                        </div>
+
                     </div>
                 </div>
 
@@ -68,14 +69,15 @@
                                 </div>
                             @endif
                                 <!-- Profile Edit Form -->
-                                <form method="post" action="{{ url('profileEdit',$users->user_id) }}" enctype="multipart/form-data" id="editinfo">
+                                <form method="post" action="{{ url('profileEdit') }}" enctype="multipart/form-data" id="editinfo">
                                     @csrf
                                     @method('PUT')
-
+                                    <input type="hidden" name="userid" id="userid" value="{{session('loginId')}}">
+                                    @foreach($users as $user)
                                     <div class="row mb-3">
                                         <label for="firstname" class="col-md-4 col-lg-3 col-form-label">First Name</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input type="text" name="firstname" class=" @error('firstname') is-invalid @enderror form-control" value="{{ $users->firstname }}">
+                                            <input type="text" name="firstname" class=" @error('firstname') is-invalid @enderror form-control" value="{{ $user->firstname }}">
                                             @error('firstname')
                                              <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
@@ -84,7 +86,7 @@
                                     <div class="row mb-3">
                                         <label for="lastname" class="col-md-4 col-lg-3 col-form-label">Last Name</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input type="text" name="lastname" class=" @error('lastname') is-invalid @enderror form-control" value="{{ $users->lastname }}">
+                                            <input type="text" name="lastname" class=" @error('lastname') is-invalid @enderror form-control" value="{{ $user->lastname }}">
                                             @error('lastname')
                                              <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
@@ -93,7 +95,7 @@
                                     <div class="row mb-3">
                                         <label for="email" class="col-md-4 col-lg-3 col-form-label">Email</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input type="email" name="email" class=" @error('email') is-invalid @enderror form-control" value="{{ $users->email }}">
+                                            <input type="email" name="email" class=" @error('email') is-invalid @enderror form-control" value="{{ $user->email }}">
                                             @error('email')
                                              <div class="invalid-feedback">{{$message}}</div>
                                             @enderror
@@ -108,14 +110,14 @@
                                             @enderror
                                         </div>
                                         <div class="col-md-8 col-lg-9">
-                                            <img src="{{Storage::url($users->image)}}" height="200" width="200" alt="">
+                                            <img src="{{Storage::url($user->image)}}" height="200" width="200" alt="">
                                         </div>
                                     </div>
 
                                     <div class="row mb-3">
                                         <label for="about" class="col-md-4 col-lg-3 col-form-label">About</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <textarea name="about" class="  @error('about') is-invalid @enderror form-control" id="about" style="height: 100px">{{ $users->about }}</textarea>
+                                            <textarea name="about" class="  @error('about') is-invalid @enderror form-control" id="about" style="height: 100px">{{ $user->about }}</textarea>
                                             @error('about')
                                     <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
@@ -125,13 +127,13 @@
                                     <div class="row mb-3">
                                         <label for="phone" class="col-md-4 col-lg-3 col-form-label">Phone</label>
                                         <div class="col-md-8 col-lg-9">
-                                            <input name="phone" type="text" class=" @error('phone') is-invalid @enderror form-control" id="phone" value="{{ $users->phone }}">
+                                            <input name="phone" type="text" class=" @error('phone') is-invalid @enderror form-control" id="phone" value="{{ $user->phone }}">
                                             @error('phone')
                                     <div class="invalid-feedback">{{$message}}</div>
                                 @enderror
                                         </div>
                                     </div>
-
+@endforeach
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary" name="edit">Save Changes</button>
                                     </div>

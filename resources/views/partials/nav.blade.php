@@ -92,19 +92,20 @@
                             <li><a href="{{'logout'}}">Logout</a></li>
                         @endif
                         @if(session('loggedin') and session('loginRoleId')==2)
-                            <li><a href="">Dashboard</a></li>
+                            <li><a href="{{ 'wdashboard' }}">Dashboard</a></li>
                             <li><a href="{{'wprofile'}}">Profile</a></li>
                             <li><a href="{{'logout'}}">Logout</a></li>
                         @endif
                         @if(session('loggedin') and session('loginRoleId')==1)
                             <li><a href="{{'cdashboard'}}">Dashboard</a></li>
-                            <li><a href="{{'profile'}}">Profile</a></li>
+                            <li><a href="{{'cprofile'}}">Profile</a></li>
                             <li><a href="{{'logout'}}">Logout</a></li>
                         @endif
                     </ul>
                 </li>
+                @endif
             </ul>
-            @endif
+
             <i class="bi bi-list mobile-nav-toggle"></i>
         </nav><!-- .navbar -->
 

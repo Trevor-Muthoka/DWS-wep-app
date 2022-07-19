@@ -1,4 +1,4 @@
-@extends('layouts.wdashboard')
+@extends('layouts.cdashboard')
 @yield('title','Profile')
 
 @section('content')
@@ -41,30 +41,30 @@
 
                             <li class="nav-item">
                                 {{-- <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button> --}}
-                                <a class="nav-link active" href="{{ route('wprofile') }}">Overview</a>
+                                <a class="nav-link active" href="{{ route('cprofile') }}">Overview</a>
                             </li>
 
 @if($addInfo->isEmpty())
                             <li class="nav-item" id="adinfo">
                                 {{-- <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Additional Information</button>
                                 --}}
-                                <a class="nav-link" id="adinfo" href="{{ route('additional') }}">Additional Info</a>
+                                <a class="nav-link" id="adinfo" href="{{ route('clientAddInfo') }}">Additional Info</a>
                             </li>
                             @else
                             <li class="nav-item  d-none" id="adinfo">
                                 {{-- <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Additional Information</button>
                                 --}}
-                                <a class="nav-link  d-none" id="adinfo" href="{{ route('additional') }}">Additional Info</a>
+                                <a class="nav-link  d-none" id="adinfo" href="{{ route('clientAddInfo') }}">Additional Info</a>
                             </li>
 @endif
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('editProfile') }}">Edit Profile</a>
+                                <a class="nav-link" href="{{ route('editCP') }}">Edit Profile</a>
                             </li>
 
                             <li class="nav-item">
                                 {{-- <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password">Change Password</button> --}}
-                                <a class="nav-link" href="{{ route('changePassword') }}">Change Password</a>
+                                <a class="nav-link" href="{{ route('changePass') }}">Change Password</a>
                             </li>
 
                         </ul>
@@ -106,6 +106,11 @@
                                    <div class="col-lg-3 col-md-4 label">Phone</div>
                                    <div class="col-lg-9 col-md-8">{{ $info->phone }}</div>
                                </div>
+
+                               <div class="row">
+                                <div class="col-lg-3 col-md-4 label">Location</div>
+                                <div class="col-lg-9 col-md-8">{{ $info->location }}</div>
+                            </div>
                                @endforeach
                                @endif
 

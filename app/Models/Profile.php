@@ -19,4 +19,8 @@ class Profile extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function profile(){
+        return $this->belongsToMany('App\Models\User','users','id','user_id');
+    }
 }

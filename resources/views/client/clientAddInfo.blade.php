@@ -1,4 +1,4 @@
-@extends('layouts.wdashboard')
+@extends('layouts.cdashboard')
 @yield('title','Profile')
 
 @section('content')
@@ -43,11 +43,11 @@
 
                             <li class="nav-item">
                                 {{-- <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button> --}}
-                                <a class="nav-link" href="{{ route('wprofile') }}">Overview</a>
+                                <a class="nav-link" href="{{ route('cprofile') }}">Overview</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link active" href="{{ route('wprofile') }}">Additional Info</a>
+                                <a class="nav-link active" href="{{ route('clientAddInfo') }}">Additional Info</a>
                             </li>
 
                             <li class="nav-item">
@@ -68,7 +68,7 @@
                                 </div>
                             @endif
                                 <!-- Profile Edit Form -->
-                                <form method="post" action="{{ url('addInfo') }}" enctype="multipart/form-data" id="addinfo">
+                                <form method="post" action="{{ url('storeInfo') }}" enctype="multipart/form-data" id="storeinfo">
                                     @csrf
                                     <div class="row mb-3">
                                         <label for="image" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
@@ -99,6 +99,14 @@
                                 @enderror
                                         </div>
                                     </div>
+
+                                    <div class="row mb-3">
+                                        <label for="location" class="col-md-4 col-lg-3 col-form-label">Location <span style="color:#ed0808">(Optional)</span></label>
+                                        <div class="col-md-8 col-lg-9">
+                                            <input name="location" type="text" class="form-control" id="location" placeholder="e.g Muimara Estate">
+                                        </div>
+                                    </div>
+
 
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-primary" name="add">Save Changes</button>
@@ -151,7 +159,7 @@
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 <script>
     $(document).ready(function (){
-        $('#addinfo').validate({
+        $('#storeinfo').validate({
             rules: {
                 image: {
                     required: true,
