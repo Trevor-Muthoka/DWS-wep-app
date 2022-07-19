@@ -8,12 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
-
+    protected $table= 'services';
     protected $fillable = [
         'name',
-        'payment',
+        'description',
         'user_id',
+        'status',
+        'payment',
         'created_at',
-        'updated_at'
+        'updated_at',
+    ];
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 }

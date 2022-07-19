@@ -52,7 +52,7 @@ Route::name('admin.')->group(function (){
     Route::get('deleteJob/{id}',[\App\Http\Controllers\AdminDashboardController::class,'deleteJob'])->name('deleteJob');
     Route::get('getServices',[\App\Http\Controllers\AdminDashboardController::class,'getServices'])->name('getServices');
     Route::get('getService/{id}',[\App\Http\Controllers\AdminDashboardController::class,'getService'])->name('getService');
-    // Route::get('deleteService/{id}',[\App\Http\Controllers\AdminDashboardController::class,'deleteService'])->name('deleteService');
+    Route::get('deleteService/{id}',[\App\Http\Controllers\AdminDashboardController::class,'deleteService'])->name('deleteService');
     Route::get('getApplications',[\App\Http\Controllers\AdminDashboardController::class,'applications'])->name('getApplications');
 
 
@@ -65,7 +65,7 @@ Route::name('admin.')->group(function (){
 });
 Route::get('logout',[\App\Http\Controllers\Auth\LoginController::class,'logout'])->name('admin.logout');
 
-// Route::name('client.')->group(function (){
+Route::name('client.')->group(function (){
     Route::get('cdashboard',[\App\Http\Controllers\ClientDashController::class,'index'])->name('clientDash');
     Route::get('post_a_job',[\App\Http\Controllers\ClientDashController::class,'postJob'])->name('postJob');
 // });

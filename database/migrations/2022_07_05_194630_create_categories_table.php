@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jobs', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('name', 25);
-            $table->string('description', 255);
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
-            $table->string('status', 25);
-            $table->integer('payment');
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobs');
+        Schema::dropIfExists('category');
     }
 };

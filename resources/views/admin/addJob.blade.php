@@ -28,7 +28,6 @@
 
                         <!-- Add User-->
                         <div id="nav-tab-card" class="tab-pane fade show active">
-
                             <form >
                                 @csrf
                                 <input type="hidden" name="userid" id="userid" value="{{session('loginId')}}">

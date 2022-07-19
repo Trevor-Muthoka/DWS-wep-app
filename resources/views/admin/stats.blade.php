@@ -153,8 +153,8 @@
                                             },
                                             xAxis: {
 
-                                                categories: ['Users'],
-                                                crosshair: true,
+                                                categories: [ 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday','Monday'],
+                                                crosshair: true
 
                                             },
                                             yAxis: {
@@ -178,14 +178,8 @@
                                                 }
                                             },
                                             series: [{
-                                                name: 'Workers',
-                                                data: workers
-                                            }, {
-                                                name: 'Clients',
-                                                data: clients
-                                            }, {
-                                                name: 'Admins',
-                                                data: admins
+                                                name: 'Users',
+                                                data: [workers,clients,admins]
                                             }]
 
                                     });
