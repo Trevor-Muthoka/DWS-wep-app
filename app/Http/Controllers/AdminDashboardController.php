@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use App\Models\Role;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,17 +19,17 @@ class AdminDashboardController extends Controller
         $workerData= User::select(DB::raw("COUNT(*) as total"))
             ->where('role_id', '=', '1')
             ->whereYear('created_at', '=', date('Y'))
-            ->groupBy(DB::raw("MONTH(created_at)"))
+            ->groupBy(DB::raw("DAY(created_at)"))
             ->pluck('total');
         $clientData= User::select(DB::raw("COUNT(*) as total"))
             ->where('role_id', '=', '2')
             ->whereYear('created_at', '=', date('Y'))
-            ->groupBy(DB::raw("MONTH(created_at)"))
+            ->groupBy(DB::raw("DAY(created_at)"))
             ->pluck('total');
         $adminsData= User::select(DB::raw("COUNT(*) as total"))
             ->where('role_id', '=', '3')
             ->whereYear('created_at', '=', date('Y'))
-            ->groupBy(DB::raw("MONTH(created_at)"))
+            ->groupBy(DB::raw("DAY(created_at)"))
             ->pluck('total');
         $workers = User::where('role_id', '=', '1')->count();
         $clients = User::where('role_id', '=', '2')->count();
@@ -95,7 +96,8 @@ class AdminDashboardController extends Controller
 
     public function displayUsers()
     {
-        $users = User::all();
+        $users = User::where('id', '!=', session('loginId'))->get();
+
         return view('admin.users', compact('users'));
     }
 
@@ -309,13 +311,112 @@ public function displayRoles()
         $res = $role->delete();
         if($res)
         {
-            return redirect()->route('admin.addRole')->with('success', 'You have deleted a role successfully.');
+            return redirect()->route('admin.getRoles')->with('success', 'You have deleted a role successfully.');
         }
         else
         {
             return back()->with('fail', 'Oops!! There seems to be a problem');
         }
     }
+
+    public function getServices()
+    {
+        $services = Service::join('users', 'users.id', '=', 'services.user_id')
+            ->select('services.id', 'services.name', 'services.description',  'services.created_at', 'services.updated_at', 'users.firstname as user' )
+            ->get();
+        return view('admin.services', compact('services'));
+
+    }
+
+    public function addServiceForm(){
+        return view('admin.addService');
+    }
+
+    public function addService(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:25|min:3',
+            'description' => 'required|string|max:25|min:3',
+            'user_id' => 'required',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['error' => $validator->messages()], 400);
+        }
+        else
+        {
+            $service = new Service();
+            $service->name = $request->name;
+            $service->description = $request->description;
+            $service->user_id = $request->user_id;
+            $service->created_at = now();
+            $service->updated_at = now();
+            $res = $service->save();
+            return response()->json(['success' => 'Service added successfully.'], 200);
+            if($res)
+            {
+                return redirect()->route('admin.addService')->with('success', 'You have added a new service successfully.');
+            }
+            else
+            {
+                return back()->with('fail', 'Oops!! There seems to be a problem');
+            }
+        }
+    }
+public function editService(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|string|max:25|min:3',
+            'description' => 'required|string|max:25|min:3',
+            'user_id' => 'required',
+        ]);
+
+        if ($validator->fails())
+        {
+            return response()->json(['error' => $validator->messages()], 400);
+        }
+        else
+        {
+            $service = Service::find($request->id);
+            $service->name = $request->name;
+            $service->description = $request->description;
+            $service->user_id = $request->user_id;
+            $service->updated_at = now();
+            $res = $service->save();
+            return response()->json(['success' => 'Service updated successfully.'], 200);
+            if($res)
+            {
+                return redirect()->route('admin.addService')->with('success', 'You have updated a service successfully.');
+            }
+            else
+            {
+                return back()->with('fail', 'Oops!! There seems to be a problem');
+            }
+        }
+    }
+    public function deleteService(Request $request)
+    {
+        $service = Service::find($request->id);
+        $res = $service->delete();
+        if($res)
+        {
+            return redirect()->route('admin.getServices')->with('success', 'You have deleted a service successfully.');
+        }
+        else
+        {
+            return back()->with('fail', 'Oops!! There seems to be a problem');
+        }
+    }
+    public function getApplications()
+    {
+        $applications = Application::join('users', 'users.id', '=', 'applications.user_id')
+            ->select('applications.id', 'applications.name', 'applications.email', 'applications.phone', 'applications.address', 'applications.created_at', 'applications.updated_at', 'users.firstname as user' )
+            ->get();
+        return view('admin.applications', compact('applications'));
+
+    }
+
 
 }
 

@@ -15,7 +15,7 @@ class Job extends Model
         'user_id',
         'status',
         'payment',
-'created_at',
+        'created_at',
     ];
 
 

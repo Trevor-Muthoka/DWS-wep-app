@@ -15,6 +15,7 @@
     </div><!-- End Page Title -->
 @endsection
 @section('content')
+
     <div class="container py-5">
 
 
@@ -28,6 +29,7 @@
 
                         <!-- Add User-->
                         <div id="nav-tab-card" class="tab-pane fade show active">
+
                             <form >
                                 @csrf
                                 <input type="hidden" name="userid" id="userid" value="{{session('loginId')}}">
@@ -35,7 +37,7 @@
                                 <ul id="form_errors">
                                 </ul>
                                 <div class="form-group">
-                                    <label for="jobname">Job Name:</label>
+                                    <label for="jobname">Name:</label>
                                     <input type="text" name="jobname" placeholder="Name of Job" id="jobname" required class="form-control">
                                     <span class="text-danger">@error('name'){{$message}}@enderror</span>
                                 </div>

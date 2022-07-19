@@ -65,6 +65,9 @@ Route::name('admin.')->group(function (){
 });
 Route::get('logout',[\App\Http\Controllers\Auth\LoginController::class,'logout'])->name('admin.logout');
 
+Route::get('jobs',[App\Http\Controllers\JobsController::class,'index'])->name('jobs');
+Route::get('jobdetail/{id}',[App\Http\Controllers\JobsController::class,'jobdetails'])->name('jobdetail');
+
 Route::name('client.')->group(function (){
     Route::get('cdashboard',[\App\Http\Controllers\ClientDashController::class,'index'])->name('clientDash');
     Route::get('post_a_job',[\App\Http\Controllers\ClientDashController::class,'postJob'])->name('postJob');

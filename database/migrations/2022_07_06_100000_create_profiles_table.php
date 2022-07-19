@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('jobs', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-            $table->string('name', 25);
-            $table->string('description', 255);
+        Schema::create('profiles', function (Blueprint $table) {
+            $table->id('profile_id')->autoIncrement();
+            $table->string('skillset',255);
+            $table->string('location',255);
+            $table->string('image');
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
-            $table->string('status', 25);
-            $table->integer('payment');
-            $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jobs');
+        Schema::dropIfExists('profiles');
     }
 };

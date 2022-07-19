@@ -4,12 +4,12 @@
 @endsection
 @section('page-title')
     <div class="pagetitle">
-        <h1>Add User</h1>
+        <h1>Add Role</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
                 <li class="breadcrumb-item">Forms</li>
-                <li class="breadcrumb-item active">Add Job</li>
+                <li class="breadcrumb-item active">Add Role</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -28,30 +28,20 @@
 
                         <!-- Add User-->
                         <div id="nav-tab-card" class="tab-pane fade show active">
+
                             <form >
                                 @csrf
-                                <input type="hidden" name="userid" id="userid" value="{{session('loginId')}}">
+
                                 <div id="success"></div>
                                 <ul id="form_errors">
                                 </ul>
                                 <div class="form-group">
-                                    <label for="jobname">Job Name:</label>
-                                    <input type="text" name="jobname" placeholder="Name of Job" id="jobname" required class="form-control">
+                                    <label for="rolename">Role Name:</label>
+                                    <input type="text" name="rolename" placeholder="Name of Role" id="rolename" required class="form-control">
                                     <span class="text-danger">@error('name'){{$message}}@enderror</span>
                                 </div>
-                                <div class="form-group">
-                                    <label for="description">Description:</label>
-                                    <input type="text" name="description" placeholder="Description of Job" id="description" required class="form-control">
-                                    <span class="text-danger">@error('description'){{$message}}@enderror</span>
-                                </div>
-                                <div class="form-group">
-                                    <label for="payment">Payment Amount:</label>
-                                    <input type="number" name="payment" id="payment" placeholder="Amount expected" required class="form-control">
-                                    <span class="text-danger">@error('payment'){{$message}}@enderror</span>
-                                </div>
-                                <input type="hidden" value="pending" name="status" id="status">
                                 <div class="py-2">
-                                    <button type="submit" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm" id="addJob"> Confirm  </button>
+                                    <button type="submit" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm" id="addRole"> Confirm  </button>
                                 </div>
 
                             </form>
@@ -73,14 +63,11 @@
 
     <script>
         $(document).ready(function (){
-            $(document).on('click', '#addJob', function(e){
+            $(document).on('click', '#addRole', function(e){
                 e.preventDefault();
                 var data= {
-                    'name': $('#jobname').val(),
-                    'description': $('#description').val(),
-                    'user_id': $('#userid').val(),
-                    'status': $('#status').val(),
-                    'payment': $('#payment').val(),
+                    'name': $('#rolename').val(),
+
                 }
                 // console.log(data);
 
@@ -90,7 +77,7 @@
                     }
                 });
                 $.ajax({
-                    url: "{{route('admin.addJobs')}}",
+                    url: "{{route('admin.addRoles')}}",
                     type: "POST",
                     data: data,
                     success: function (response){

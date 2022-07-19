@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name', 25);
             $table->string('description', 255);
             $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
+            $table->foreignId('city_id')->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
+            $table->foreignId('category_id')->constrained()->cascadeOnUpdate()->cascadeOnUpdate();
             $table->string('status', 25);
             $table->integer('payment');
             $table->boolean('is_deleted')->default(false);
