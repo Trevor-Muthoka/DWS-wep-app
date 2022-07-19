@@ -98,6 +98,7 @@ Route::post('updatePassword',[\App\Http\Controllers\WorkerDashboardController::c
 Route::get('postedJobs',[\App\Http\Controllers\ClientDashController::class, 'postedJobs'])->name('postedJobs');
 Route::get('editJob/{id}',[\App\Http\Controllers\ClientDashController::class, 'editJob'])->name('editJob');
 Route::post('updatejob{id}',[\App\Http\Controllers\ClientDashController::class, 'updateJob'])->name('updatejob');
+Route::get('deletejob/{id}',[\App\Http\Controllers\ClientDashController::class, 'deleteJob'])->name('deletejob');
 
 //Services CRUD
 Route::get('viewServices', [\App\Http\Controllers\WorkerDashboardController::class, 'viewService'])->name('viewServices');
@@ -106,3 +107,5 @@ Route::post('addService', [\App\Http\Controllers\WorkerDashboardController::clas
 Route::get('editService/{id}', [\App\Http\Controllers\WorkerDashboardController::class, 'editService'])->name('editService');
 Route::post('updateService', [\App\Http\Controllers\WorkerDashboardController::class, 'updateService'])->name('updateService');
 Route::get('deleteService/{id}', [\App\Http\Controllers\WorkerDashboardController::class, 'destroyService'])->name('deleteService');
+
+Route::post('contacts',[\App\Http\Controllers\IndexController::class, 'contact'])->name('contacts');

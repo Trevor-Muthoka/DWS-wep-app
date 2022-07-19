@@ -1125,11 +1125,11 @@ section {
 .contact .info .email, .contact .info .phone {
   margin-top: 40px;
 }
-.contact .php-email-form {
+.contact .contactform {
   width: 100%;
   background: #fff;
 }
-.contact .php-email-form .form-group {
+.contact .contactform .form-group {
   padding-bottom: 8px;
 }
 .contact .php-email-form .error-message {
@@ -1169,22 +1169,22 @@ section {
   -webkit-animation: animate-loading 1s linear infinite;
   animation: animate-loading 1s linear infinite;
 }
-.contact .php-email-form input, .contact .php-email-form textarea {
+.contact .contactform input, .contact .contactform textarea {
   border-radius: 0;
   box-shadow: none;
   font-size: 14px;
   border-radius: 4px;
 }
-.contact .php-email-form input:focus, .contact .php-email-form textarea:focus {
+.contact .contactform input:focus, .contact .contactform textarea:focus {
   border-color: rgba(111, 187, 211, 0.9);
 }
-.contact .php-email-form input {
+.contact .contactform input {
   height: 44px;
 }
-.contact .php-email-form textarea {
+.contact .contactform textarea {
   padding: 10px 12px;
 }
-.contact .php-email-form button[type=submit] {
+.contact .contactform button[type=submit] {
   background: rgba(111, 187, 211, 0.9);
   border: 0;
   padding: 10px 24px;
@@ -1192,7 +1192,7 @@ section {
   transition: 0.4s;
   border-radius: 4px;
 }
-.contact .php-email-form button[type=submit]:hover {
+.contact .contactform button[type=submit]:hover {
   background: #ffcd6b;
 }
 @-webkit-keyframes animate-loading {
@@ -1212,6 +1212,26 @@ section {
   }
 }
 
+.contactform{
+    width: 100%;
+    background: #fff;
+}
+
+.contactform input textarea{
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.contactform button[type=submit] {
+    background: rgba(111, 187, 211, 0.9);
+    border: 0;
+    padding: 10px 24px;
+    color: #151515;
+    transition: 0.4s;
+    border-radius: 4px;
+  }
 /*--------------------------------------------------------------
 # Breadcrumbs
 --------------------------------------------------------------*/

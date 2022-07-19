@@ -33,6 +33,7 @@
                                 @csrf
                                 
                                 <input type="hidden" name="userid" id="userid" value="{{session('loginId')}}">
+                                <input type="hidden" name="id" id="id" value="{{$services->id}}">
                                 <div id="success"></div>
                                 <ul id="form_errors">
                                 </ul>
@@ -50,7 +51,7 @@
                                 </div>
                                
                                 <div class="py-2">
-                                    <button type="submit" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm" id="addService"> Add </button>
+                                    <button type="submit" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm" id="addService"> Update </button>
                                 </div>
 
                             </form>

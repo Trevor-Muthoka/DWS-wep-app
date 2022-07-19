@@ -81,78 +81,6 @@
     </section><!-- End Services Section -->
 
 
-
-{{--    <!-- ======= Services Section ======= -->--}}
-{{--    <section id="service" class="services pt-0">--}}
-{{--        <div class="container" data-aos="fade-up">--}}
-
-{{--            <div class="section-header">--}}
-{{--                <span>Some Of Our Services</span>--}}
-{{--                <h2>Some Of Our Services</h2>--}}
-
-{{--            </div>--}}
-
-{{--            <div class="row gy-4">--}}
-
-{{--                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">--}}
-{{--                    <div class="card">--}}
-{{--                        <div class="card-img">--}}
-{{--                            <img src=" {{ asset('assets/img/washingclothes.jpg')}}" alt="" class="img-fluid">--}}
-{{--                        </div>--}}
-{{--                        <h3><a href="#" class="stretched-link">Cleaning clothes</a></h3>--}}
-
-{{--                    </div>--}}
-{{--                </div><!-- End Card Item -->--}}
-
-{{--                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">--}}
-{{--                    <div class="card">--}}
-{{--                        <div class="card-img">--}}
-{{--                            <img src="{{ asset('assets/img/iron..jpg')}}" alt="" class="img-fluid">--}}
-{{--                        </div>--}}
-{{--                        <h3><a href="#" class="stretched-link">Ironing and folding clothes</a></h3>--}}
-{{--                    </div>--}}
-{{--                </div><!-- End Card Item -->--}}
-
-{{--                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">--}}
-{{--                    <div class="card">--}}
-{{--                        <div class="card-img">--}}
-{{--                            <img src="{{ asset('assets/img/gardening.jpg')}}" alt="" class="img-fluid">--}}
-{{--                        </div>--}}
-{{--                        <h3><a href="#" class="stretched-link">Gardening</a></h3>--}}
-{{--                    </div>--}}
-{{--                </div><!-- End Card Item -->--}}
-
-{{--                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">--}}
-{{--                    <div class="card">--}}
-{{--                        <div class="card-img">--}}
-{{--                            <img src="{{ asset('assets/img/cooking.webp')}}" alt="" class="img-fluid">--}}
-{{--                        </div>--}}
-{{--                        <h3><a href="#" class="stretched-link">Cooking</a></h3>--}}
-{{--                    </div>--}}
-{{--                </div><!-- End Card Item -->--}}
-
-{{--                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">--}}
-{{--                    <div class="card">--}}
-{{--                        <div class="card-img">--}}
-{{--                            <img src="{{ asset('assets/img/pet.jpg')}}" alt="" class="img-fluid">--}}
-{{--                        </div>--}}
-{{--                        <h3><a href="#" class="stretched-link">Taking care of pets</a></h3>--}}
-{{--                    </div>--}}
-{{--                </div><!-- End Card Item -->--}}
-
-{{--                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">--}}
-{{--                    <div class="card">--}}
-{{--                        <div class="card-img">--}}
-{{--                            <img src="{{ asset('assets/img/carwash.jpeg')}}" alt="" class="img-fluid">--}}
-{{--                        </div>--}}
-{{--                        <h3><a href="#" class="stretched-link">Washing car</a></h3>--}}
-{{--                    </div>--}}
-{{--                </div><!-- End Card Item -->--}}
-
-{{--            </div>--}}
-
-{{--        </div>--}}
-{{--    </section><!-- End Services Section -->--}}
     <!-- ======= Team Section ======= -->
     <section id="team" class="team">
         <div class="container" data-aos="fade-up">
@@ -308,23 +236,27 @@
 
             <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
                 <div class="swiper-wrapper">
-
+                    @foreach($contacts as $contact)
                     <div class="swiper-slide">
+                       
                         <div class="testimonial-item">
-                            <img src="assets3/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                            <h3>Saul Goodman</h3>
-                            <h4>Ceo &amp; Founder</h4>
+                            
+                            <h3>{{ $contact->name }}</h3>
+                            <h4>{{ $contact->subject }}</h4>
                             <p>
                                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                                Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                                {{ $contact->message }}
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
+                           
                         </div>
-                    </div><!-- End testimonial item -->
-
-                    <div class="swiper-slide">
+                    </div>
+                    @endforeach
+                    <!-- End testimonial item -->
+                
+                    {{-- <div class="swiper-slide">
                         <div class="testimonial-item">
-                            <img src="assets3/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
+                            
                             <h3>Sara Wilsson</h3>
                             <h4>Designer</h4>
                             <p>
@@ -337,7 +269,7 @@
 
                     <div class="swiper-slide">
                         <div class="testimonial-item">
-                            <img src="assets3/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
+                            
                             <h3>Jena Karlis</h3>
                             <h4>Store Owner</h4>
                             <p>
@@ -350,7 +282,7 @@
 
                     <div class="swiper-slide">
                         <div class="testimonial-item">
-                            <img src="assets3/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
+                            
                             <h3>Matt Brandon</h3>
                             <h4>Freelancer</h4>
                             <p>
@@ -363,7 +295,7 @@
 
                     <div class="swiper-slide">
                         <div class="testimonial-item">
-                            <img src="assets3/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
+                            
                             <h3>John Larson</h3>
                             <h4>Entrepreneur</h4>
                             <p>
@@ -372,7 +304,7 @@
                                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                             </p>
                         </div>
-                    </div><!-- End testimonial item -->
+                    </div><!-- End testimonial item --> --}}
                 </div>
                 <div class="swiper-pagination"></div>
             </div>
@@ -380,6 +312,67 @@
         </div>
     </section><!-- End Testimonials Section -->
 
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+        <div class="container" data-aos="fade-up">
+  
+          <div class="section-title">
+            <h2>Contact</h2>
+            <p>Contact Us</p>
+          </div>
+  
+  
+            <div class="col-lg-8 mt-5 mt-lg-0">
+   
+                @if(session('success'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        {{ session('success') }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+              <form action="{{route('contacts')}}" method="post" class="contactform">
+                @csrf
+                <div class="row">
+                  <div class="col-md-6 form-group">
+                    <input type="text" name="name" class=" @error('name') is-invalid @enderror form-control" id="names" placeholder="Your Name" >
+                    @error('name')
+                    <div class="invalid-feedback">{{$message}}</div>
+                   @enderror
+                  </div>
+                  <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <input type="email" class=" @error('email') is-invalid @enderror form-control" name="email" id="emails" placeholder="Your Email" >
+                    @error('email')
+                    <div class="invalid-feedback">{{$message}}</div>
+                   @enderror
+                  </div>
+                </div>
+                <div class="form-group mt-3">
+                  <input type="text" class=" @error('subject') is-invalid @enderror form-control" name="subject" id="subjects" placeholder="Subject" >
+                  @error('subject')
+                  <div class="invalid-feedback">{{$message}}</div>
+                 @enderror
+                </div>
+                <div class="form-group mt-3">
+                  <textarea class=" @error('message') is-invalid @enderror form-control" name="message" rows="5" placeholder="Message" id="messages" ></textarea>
+                  @error('message')
+                  <div class="invalid-feedback">{{$message}}</div>
+                 @enderror
+                </div>
+                {{-- <div class="col-md-12 text-center">
+                    <div class="loading">Loading</div>
+                    <div class="error-message"></div>
+                    <div class="sent-message">Your message has been sent. Thank you!</div>
+   --}}
+                    <button type="submit">Send Message</button>
+                  {{-- </div> --}}
+              </form>
+  
+            </div>
+  
+          </div>
+  
+        </div>
+      </section><!-- End Contact Section -->
 
 </main><!-- End #main -->
 @endsection

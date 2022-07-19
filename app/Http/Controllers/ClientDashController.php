@@ -231,4 +231,11 @@ class ClientDashController extends Controller
 
         return redirect()->route('postedJobs')->with('success', 'You have updated the job successfully.');
     }
+
+    public function deleteJob($id)
+    {
+        $job = Jobs::find($id);
+        $job->delete();
+        return redirect()->route('postedJobs')->with('success', 'You have deleted the service successfully.');
+    }
 }

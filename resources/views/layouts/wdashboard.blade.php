@@ -260,7 +260,7 @@
         {{--        </li><!-- End Dashboard Nav -->--}}
 
         <li class="nav-item">
-            <a class="nav-link " data-bs-target="#components-nav" data-bs-toggle="collapse" href="{{route('client.clientDash')}}">
+            <a class="nav-link " data-bs-target="#components-nav" data-bs-toggle="collapse" href="{{route('wdashboard')}}">
                 <i class="bi bi-menu-button-wide"></i><span>Dashboard</span>
             </a>
 {{--            <ul id="components-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">--}}
