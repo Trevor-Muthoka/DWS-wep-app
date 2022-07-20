@@ -87,12 +87,12 @@
                 <li class="dropdown"><a href="#"><span>{{session('loginFirstname')}}</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         @if(session('loggedin') and session('loginRoleId')==3)
-                            <li><a href="{{'admin.dashboard'}}">Dashboard</a></li>
+                            <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                             <li><a href="{{'profile'}}">Profile</a></li>
                             <li><a href="{{'logout'}}">Logout</a></li>
                         @endif
                         @if(session('loggedin') and session('loginRoleId')==2)
-                            <li><a href="{{ 'wdashboard' }}">Dashboard</a></li>
+                            <li><a href="{{'wdashboard' }}">Dashboard</a></li>
                             <li><a href="{{'wprofile'}}">Profile</a></li>
                             <li><a href="{{'logout'}}">Logout</a></li>
                         @endif
