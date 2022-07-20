@@ -51,7 +51,13 @@
                                     <td>
                                         <a href="{{route('deletejob',$job->id)}}" class="btn btn-danger">Delete</a>
                                     </td>
-                                    
+
+                                    @if($job->status == "Pending")
+                                    <td>
+                                        
+                                        <a href="{{route('payment',$job->id)}}" class="btn btn-dark">Pay</a>
+                                    </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>

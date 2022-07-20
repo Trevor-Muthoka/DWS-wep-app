@@ -65,7 +65,7 @@ Route::name('admin.')->group(function (){
 });
 Route::get('logout',[\App\Http\Controllers\Auth\LoginController::class,'logout'])->name('admin.logout');
 
-Route::name('client.')->group(function (){
+// Route::name('client.')->group(function (){
     Route::get('cdashboard',[\App\Http\Controllers\ClientDashController::class,'index'])->name('clientDash');
     Route::get('post_a_job',[\App\Http\Controllers\ClientDashController::class,'postJob'])->name('postJob');
 // });
@@ -99,7 +99,8 @@ Route::get('postedJobs',[\App\Http\Controllers\ClientDashController::class, 'pos
 Route::get('editJob/{id}',[\App\Http\Controllers\ClientDashController::class, 'editJob'])->name('editJob');
 Route::post('updatejob{id}',[\App\Http\Controllers\ClientDashController::class, 'updateJob'])->name('updatejob');
 Route::get('deletejob/{id}',[\App\Http\Controllers\ClientDashController::class, 'deleteJob'])->name('deletejob');
-
+Route::get('payment/{id}',[\App\Http\Controllers\ClientDashController::class,'paymentJob'])->name('payment');
+Route::post('updatepayment',[\App\Http\Controllers\ClientDashController::class,'updatePaymentJob'])->name('updatepayment');
 //Services CRUD
 Route::get('viewServices', [\App\Http\Controllers\WorkerDashboardController::class, 'viewService'])->name('viewServices');
 Route::get('addServiceForm', [\App\Http\Controllers\WorkerDashboardController::class, 'viewAddForm'])->name('addServiceForm');
@@ -109,3 +110,4 @@ Route::post('updateService', [\App\Http\Controllers\WorkerDashboardController::c
 Route::get('deleteService/{id}', [\App\Http\Controllers\WorkerDashboardController::class, 'destroyService'])->name('deleteService');
 
 Route::post('contacts',[\App\Http\Controllers\IndexController::class, 'contact'])->name('contacts');
+Route::get('viewPay',[\App\Http\Controllers\WorkerDashboardController::class, 'viewPayments'])->name('viewPay');

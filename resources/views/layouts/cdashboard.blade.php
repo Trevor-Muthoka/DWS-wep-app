@@ -263,7 +263,7 @@
         {{--        </li><!-- End Dashboard Nav -->--}}
 
         <li class="nav-item">
-            <a class="nav-link " data-bs-target="#components-nav" data-bs-toggle="collapse" href="{{route('clientDash')}}">
+            <a class="nav-link " data-bs-target="#components-nav" data-bs-toggle="collapse" href="{{route('cprofile')}}">
                 <i class="bi bi-menu-button-wide"></i><span>Dashboard</span>
             </a>
 {{--            <ul id="components-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">--}}
@@ -351,7 +351,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="#">
+                                    <a href="{{ route('postedJobs') }}">
                                         <i class="bi bi-circle"></i><span>Posted jobs</span>
                                     </a>
                                 </li>
@@ -462,34 +462,11 @@
 {{--            </ul>--}}
         </li><!-- End Icons Nav -->
 
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-bookmark-check-fill"></i><span>Reviews</span>
-{{--                <i class="bi bi-gem"></i><span>Book a worker</span><i class="bi bi-chevron-down ms-auto"></i>--}}
-            </a>
-{{--            <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">--}}
-{{--                --}}{{--                <li>--}}
-{{--                --}}{{--                    <a href="icons-bootstrap.html">--}}
-{{--                --}}{{--                        <i class="bi bi-circle"></i><span>Bootstrap Icons</span>--}}
-{{--                --}}{{--                    </a>--}}
-{{--                --}}{{--                </li>--}}
-{{--                --}}{{--                <li>--}}
-{{--                --}}{{--                    <a href="icons-remix.html">--}}
-{{--                --}}{{--                        <i class="bi bi-circle"></i><span>Remix Icons</span>--}}
-{{--                --}}{{--                    </a>--}}
-{{--                --}}{{--                </li>--}}
-{{--                --}}{{--                <li>--}}
-{{--                --}}{{--                    <a href="icons-boxicons.html">--}}
-{{--                --}}{{--                        <i class="bi bi-circle"></i><span>Boxicons</span>--}}
-{{--                --}}{{--                    </a>--}}
-{{--                --}}{{--                </li>--}}
-{{--            </ul>--}}
-        </li><!-- End Icons Nav -->
-
+        
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{route('admin.profile')}}">
+            <a class="nav-link collapsed" href="{{route('cprofile')}}">
                 <i class="bi bi-person"></i>
                 <span>Profile</span>
             </a>

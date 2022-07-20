@@ -6,6 +6,7 @@ use App\Models\Jobs;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Profile;
+use App\Models\Payment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -237,5 +238,29 @@ class ClientDashController extends Controller
         $job = Jobs::find($id);
         $job->delete();
         return redirect()->route('postedJobs')->with('success', 'You have deleted the service successfully.');
+    }
+
+    public function paymentJob($id)
+    {
+        $jobs=Jobs::where('id',$id)->get();
+        return view('client.payment',compact('jobs'));
+    }
+
+    public function updatePaymentJob(Request $request)
+    {
+        $id=$request->id;
+        $request->validate([
+            'choice' => 'required',
+        ]);
+
+        $payment=new Payment();
+        $payment->amount = $request->amount;
+        $payment->paymentType = $request->choice;
+        $payment->TransactionCode =$request->mpesa;
+        $payment->job_id = $id;
+        $payment->user_id =$request->userid;
+        $payment->save();
+
+        return redirect()->route('postedJobs')->with('success', 'You have completed the payment successfully.');
     }
 }

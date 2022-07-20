@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Profile;
 use App\Models\Service;
+use App\Models\Jobs;
+use App\Models\Payment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -262,5 +264,20 @@ class WorkerDashboardController extends Controller
         $service = Service::find($id);
         $service->delete();
         return redirect()->route('viewServices')->with('success', 'You have deleted the service successfully.');
+    }
+
+    public function viewPayments()
+    {
+        $loginID=session('loginId');
+        
+
+        $users = DB::table('users')
+        ->join('jobs','users.id','=','jobs.user_id')
+        ->join('payments','users.id','=','payments.user_id')
+        ->select('users.*','jobs.*','payments.*')
+        ->where('user_id','=',$loginID)
+        ->get();
+
+        return view('dashboards.wpayments',compact('users'));
     }
 }
