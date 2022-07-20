@@ -108,24 +108,19 @@ class WorkerDashboardController extends Controller
              $path = $request->file('image')->store('public/images');
 //             $profile->image = $path;
              Profile::where('user_id',$request->userid)->update([
-//             'firstname' => $request->firstname,
-//             'lastname' => $request->lastname,
-//             'email' => $request->email,
+
                  'image' => $path
 
              ]);
          }
 
-         $profile->firstname = $request->firstname;
-         $profile->lastname = $request->lastname;
-         $profile->email = $request->email;
-         $profile->phone = $request->phone;
-         $profile->about = $request->about;
+        //  $profile->firstname = $request->firstname;
+        //  $profile->lastname = $request->lastname;
+        //  $profile->email = $request->email;
+        //  $profile->phone = $request->phone;
+        //  $profile->about = $request->about;
 
          Profile::where('user_id',$request->userid)->update([
-//             'firstname' => $request->firstname,
-//             'lastname' => $request->lastname,
-//             'email' => $request->email,
              'phone' => $request->phone,
              'about' => $request->about,
 
@@ -243,7 +238,7 @@ class WorkerDashboardController extends Controller
 
     public function updateService(Request $request)
     {
-        $id=$request->userid;
+        $id=$request->id;
         $validator = Validator::make($request->all(), [
             'servicename' => 'required|string|max:25|min:3',
             'user_id' => 'required',

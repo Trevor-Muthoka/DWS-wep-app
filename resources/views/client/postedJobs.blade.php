@@ -17,9 +17,9 @@
                     <div id="success_message"></div>
                     <div class="table-responsive ">
                         <a href="{{ route('postJob') }}" class="btn btn-primary">Add Job</a>
-                        @if(session('status'))
+                        @if(session('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('status') }}
+                            {{ session('success') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
@@ -32,6 +32,8 @@
                                 <th>Location</th>
                                 <th>Status</th>
                                 <th>Action</th>
+                                <th></th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody id="usertable">
@@ -44,8 +46,12 @@
                                     <td>{{$job->status}}</td>
                                     <td>
                                         <a href="{{route('editJob',$job->id)}}" class="btn btn-primary">Edit</a>
-                                    {{--   <a href="route('deletej }}ob',$job->id)}}" class="btn btn-danger">Delete</a> --}}
+                                      
                                     </td>
+                                    <td>
+                                        <a href="{{route('deletejob',$job->id)}}" class="btn btn-danger">Delete</a>
+                                    </td>
+                                    
                                 </tr>
                             @endforeach
                             </tbody>
