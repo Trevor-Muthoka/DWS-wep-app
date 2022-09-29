@@ -80,14 +80,14 @@
 {{--                <li><a class="nav-link scrollto" href="#team">Team</a></li>--}}
                 @if(session('loggedin')== false)
                     <li><a class="nav-link scrollto" href="{{route('login')}}">Login</a></li>
-                    <li><a class="nav-link scrollto" href="{{route('register')}}">Registration</a></li>
+                    <li><a class="nav-link scrollto" href="{{route('registration')}}">Registration</a></li>
                 @endif
 
                 @if(session('loggedin'))
                 <li class="dropdown"><a href="#"><span>{{session('loginFirstname')}}</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
                         @if(session('loggedin') and session('loginRoleId')==3)
-                            <li><a href="{{'admin.dashboard'}}">Dashboard</a></li>
+                            <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                             <li><a href="{{'profile'}}">Profile</a></li>
                             <li><a href="{{'logout'}}">Logout</a></li>
                         @endif

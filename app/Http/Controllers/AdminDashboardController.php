@@ -44,6 +44,8 @@ class AdminDashboardController extends Controller
 
     public function displayAddUser()
     {
+
+
         return view('admin.addUser');
     }
 
@@ -100,6 +102,12 @@ class AdminDashboardController extends Controller
 
         return view('admin.users', compact('users'));
     }
+    public function editUserForm($id)
+    {
+        $user = User::find($id);
+        $role= Role::find($user->role_id);
+        return view('admin.editUser', compact('user','role'));
+    }
 
     public function editUser(Request $request)
     {
@@ -143,7 +151,9 @@ class AdminDashboardController extends Controller
         }
     }
     public function addJobForm(){
-        return view('admin.addJob');
+        $cities = DB::table('cities')->get();
+        $categories = DB::table('categories')->get();
+        return view('admin.addJob',compact('cities','categories'));
     }
 
     public function addJobs(Request $request)
@@ -152,6 +162,8 @@ class AdminDashboardController extends Controller
             'name' => 'required|string|max:25|min:3',
             'description' => 'required|string|max:25|min:3',
             'user_id' => 'required',
+            'category_id' => 'required',
+            'city_id' => 'required',
             'status' => 'required',
             'payment' => 'required',
         ]);
@@ -169,6 +181,8 @@ class AdminDashboardController extends Controller
             $job->user_id = $request->user_id;
             $job->status = $request->status;
             $job->payment = $request->payment;
+            $job->category_id = $request->category_id;
+            $job->city_id = $request->city_id;
             $job->created_at = now();
             $job->updated_at = now();
             $res = $job->save();
@@ -192,19 +206,30 @@ class AdminDashboardController extends Controller
             ->get();
         return view('admin.jobs', compact('jobs'));
     }
-    public function editJob(Request $request)
+    public function editJobForm($id){
+        $job = Job::find($id);
+        $job_city= DB::table('cities')->where('id',$job->city_id)->first();
+        $cities = DB::table('cities')->get();
+        $categories = DB::table('categories')->get();
+        return view('admin.editJob',compact('job','cities','categories','job_city'));
+    }
+    public function UpdateJob(Request $request)
     {
+
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:25|min:3',
             'description' => 'required|string|max:25|min:3',
             'user_id' => 'required',
+            'category_id' => 'required',
+            'city_id' => 'required',
             'status' => 'required',
             'payment' => 'required',
         ]);
 
         if ($validator->fails())
         {
-            return response()->json(['error' => $validator->messages()], 400);
+            return back()->with('Status' ,'Something Failed' );
         }
         else
         {
@@ -212,14 +237,16 @@ class AdminDashboardController extends Controller
             $job->name = $request->name;
             $job->description = $request->description;
             $job->user_id = $request->user_id;
+            $job->city_id = $request->city_id;
+            $job->category_id = $request->category_id;
             $job->status = $request->status;
             $job->payment = $request->payment;
             $job->updated_at = now();
             $res = $job->save();
-            return response()->json(['success' => 'Job updated successfully.'], 200);
+
             if($res)
             {
-                return redirect()->route('admin.addJob')->with('success', 'You have updated a job successfully.');
+                return redirect()->route('admin.getJobs')->with('success', 'You have updated a job successfully.');
             }
             else
             {

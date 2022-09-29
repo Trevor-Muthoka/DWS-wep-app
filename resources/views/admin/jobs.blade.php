@@ -38,8 +38,8 @@
                                     <td>{{$job->status}}</td>
                                     <td>{{$job->payment}}</td>
                                     <td>
-                                        <a href="{{route('admin.editUser',$job->id)}}" class="btn btn-primary">Edit</a>
-                                        <a href="{{route('admin.deleteUser',$job->id)}}" class="btn btn-danger">Delete</a>
+                                        <a href="{{route('admin.editJobs',$job->id)}}" class="btn btn-primary">Edit</a>
+                                        <a href="{{route('admin.deleteJob',$job->id)}}" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

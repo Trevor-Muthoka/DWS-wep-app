@@ -7,7 +7,7 @@
         <h1>Add User</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('index')}}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
                 <li class="breadcrumb-item">Forms</li>
                 <li class="breadcrumb-item active">Add Job</li>
             </ol>
@@ -49,10 +49,33 @@
                                     <input type="number" name="payment" id="payment" placeholder="Amount expected" required class="form-control">
                                     <span class="text-danger">@error('payment'){{$message}}@enderror</span>
                                 </div>
+                                <div class="form-group">
+                                    <label for="category">Category:</label>
+
+                                    <select name="category" id="category" class="form-control">
+                                        @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                        @endforeach
+                                    </select>
+
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="city">City:</label>
+
+                                    <select name="city" id="city" class="form-control">
+
+                                        @foreach($cities as $city)
+                                        <option value="{{$city->id}}">{{$city->name}}</option>
+                                        @endforeach
+                                    </select>
+
+                                </div>
                                 <input type="hidden" value="pending" name="status" id="status">
                                 <div class="py-2">
                                     <button type="submit" class="subscribe btn btn-primary btn-block rounded-pill shadow-sm" id="addJob"> Confirm  </button>
                                 </div>
+
 
                             </form>
                         </div>
@@ -79,6 +102,8 @@
                     'name': $('#jobname').val(),
                     'description': $('#description').val(),
                     'user_id': $('#userid').val(),
+                    'city_id': $('#city').val(),
+                    'category_id': $('#category').val(),
                     'status': $('#status').val(),
                     'payment': $('#payment').val(),
                 }
